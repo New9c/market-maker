@@ -1,2 +1,4 @@
 .env
 *tmp
+.vercel
+.env*.local
