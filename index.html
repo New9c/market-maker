@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Marketing Post Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main class="app-shell">
+        <header class="app-header">
+            <p class="tag">✨ Great for small teams</p>
+            <h1>Marketing post builder</h1>
+            <p class="lead">
+                Feed in your business detail, goal, and tone to get ready-to-publish Threads and Facebook copy.
+            </p>
+        </header>
+
+        <section class="content-grid">
+            <form class="input-panel" id="generator-form">
+                <h2>Essentials</h2>
+                <label>
+                    Business name
+                    <input type="text" id="businessName" placeholder="Blossom Coffee Shop" required />
+                </label>
+                <label>
+                    Campaign goal
+                    <input type="text" id="goal" placeholder="Drive weekend walk-ins" required />
+                </label>
+                <label>
+                    Offer or news
+                    <textarea id="offer" rows="3" placeholder="New seasonal drinks, 15% off on Saturdays"></textarea>
+                </label>
+                <label>
+                    Desired tone
+                    <select id="tone">
+                        <option>Friendly</option>
+                        <option>Professional</option>
+                        <option>Edgy</option>
+                        <option>Witty</option>
+                        <option>Inspiring</option>
+                    </select>
+                </label>
+                <div class="input-actions">
+                    <label class="inline">
+                        <input type="checkbox" id="threads" checked /> Threads
+                    </label>
+                    <label class="inline">
+                        <input type="checkbox" id="facebook" checked /> Facebook
+                    </label>
+                </div>
+                <div class="submit-row">
+                    <button class="primary" type="submit" id="generate-btn">
+                        <span class="btn-text">Generate copy</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                    <span class="hint">Powered by Groq + Llama</span>
+                </div>
+            </form>
+
+            <section class="preview-panel">
+                <div class="preview-heading">
+                    <h2>Preview</h2>
+                    <p class="tag" id="status-tag">Draft text</p>
+                </div>
+                <div id="preview-container">
+                    <article class="preview-card">
+                        <p class="platform">Threads</p>
+                        <p class="preview-text" id="threads-preview">
+                            Your generated Threads post will appear here...
+                        </p>
+                    </article>
+                    <article class="preview-card">
+                        <p class="platform">Facebook</p>
+                        <p class="preview-text" id="facebook-preview">
+                            Your generated Facebook post will appear here...
+                        </p>
+                    </article>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="main.js"> </script>
+</body>
+
+</html>
