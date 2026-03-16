@@ -13,13 +13,12 @@ export async function POST(request) {
 
     const platformList = platforms.join(', ');
     const prompt = `You are a creative marketing copywriter. Write marketing copy for:
-- Business: ${businessName}
-- Goal: ${goal}
-- Offer: ${offer}
-- Tone: ${tone}
-- Platforms: ${platformList}
+    - Business: ${businessName}
+    - Goal: ${goal}
+    - Offer: ${offer}
+    - Tone: ${tone}
+    - Platforms: ${platformList}`;
 
-Write in the requested tone. Include a Threads post and a Facebook post. Make it sound natural and engaging.`;
 
     const stream = await client.chat.completions.create({
         model: 'meta-llama/llama-4-scout-17b-16e-instruct',
