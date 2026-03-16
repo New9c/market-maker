@@ -11,12 +11,13 @@ export async function POST(request) {
         return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const prompt = `You are a creative marketing copywriter. Write marketing copy for:
+    const prompt = `You are a creative marketing copywriter. Write a marketing post for:
     - Business: ${businessName}
     - Goal: ${goal}
     - Offer: ${offer}
     - Tone: ${tone}
-    - Platform: ${platform}`;
+    - Platform: ${platform}
+    Just make the post, don't have "Here's the post..." at the front or "This post has..." at the end. The post will be used in a copy paste way, so talk to the customer, not me`;
 
 
     const stream = await client.chat.completions.create({

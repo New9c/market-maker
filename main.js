@@ -40,7 +40,6 @@ form.addEventListener('submit', async (e) => {
 
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
-            const result = "";
 
             while (true) {
                 const { done, value } = await reader.read();
