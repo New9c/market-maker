@@ -47,6 +47,40 @@
                         <option>Inspiring</option>
                     </select>
                 </label>
+                <label>
+                    Model
+                    <select id="model">
+                        <option value="openai/gpt-oss-120b">Gpt OSS 120B</option>
+                        <option value="openai/gpt-oss-20b">Gpt OSS 20B</option>
+                        <option value="meta-llama/llama-4-scout-17b-16e-instruct">Llama 4 Scout</option>
+                        <option value="meta-llama/llama-4-lite-17b-16e-instruct">Llama 4 Lite</option>
+                        <option value="llama-3.3-70b-versatile">Llama 3.3 Versatile</option>
+                        <option value="llama-3.1-8b-instant">Llama 3.1 Instant</option>
+                        <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+                        <option value="groq/compound">Groq Compound</option>
+                        <option value="groq/compound-mini">Groq Compound Mini</option>
+                        <!--
+groq/compound-mini
+canopylabs/orpheus-v1-english
+moonshotai/kimi-k2-instruct-0905
+canopylabs/orpheus-arabic-saudi
+meta-llama/llama-prompt-guard-2-86m
+openai/gpt-oss-120b
+openai/gpt-oss-20b
+whisper-large-v3-turbo
+llama-3.1-8b-instant
+qwen/qwen3-32b
+allam-2-7b
+openai/gpt-oss-safeguard-20b
+llama-3.3-70b-versatile
+whisper-large-v3
+moonshotai/kimi-k2-instruct
+meta-llama/llama-4-scout-17b-16e-instruct
+meta-llama/llama-prompt-guard-2-22m
+groq/compound
+-->
+                    </select>
+                </label>
                 <div class="input-actions">
                     <label class="inline">
                         <input type="checkbox" id="threads" checked /> Threads
@@ -57,10 +91,10 @@
                 </div>
                 <div class="submit-row">
                     <button class="primary" type="submit" id="generate-btn">
-                        <span class="btn-text">Generate copy</span>
+                        <span class="btn-text">Generate Post</span>
                         <span class="btn-loader"></span>
                     </button>
-                    <span class="hint">Powered by Groq + Llama</span>
+                    <span class="hint">Powered by Groq</span>
                 </div>
             </form>
 

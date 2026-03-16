@@ -5,7 +5,7 @@ const client = new Groq();
 export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
-    const { businessName, goal, offer, tone, platform } = await request.json();
+    const { businessName, goal, offer, tone, platform, model } = await request.json();
 
     if (!businessName || !goal || !tone || !platform) {
         return Response.json({ error: 'Missing required fields' }, { status: 400 });
@@ -21,7 +21,7 @@ export async function POST(request) {
 
 
     const stream = await client.chat.completions.create({
-        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        model: model || 'meta-llama/llama-4-scout-17b-16e-instruct',
         messages: [{ role: 'user', content: prompt }],
         temperature: 1,
         max_completion_tokens: 1024,

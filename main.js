@@ -13,6 +13,7 @@ form.addEventListener('submit', async (e) => {
     const goal = document.getElementById('goal').value;
     const offer = document.getElementById('offer').value;
     const tone = document.getElementById('tone').value;
+    const model = document.getElementById('model').value;
     const platforms = [];
     if (document.getElementById('threads').checked) platforms.push('Threads');
     if (document.getElementById('facebook').checked) platforms.push('Facebook');
@@ -35,7 +36,7 @@ form.addEventListener('submit', async (e) => {
             const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ businessName, goal, offer, tone, platform: platforms[i] })
+                body: JSON.stringify({ businessName, goal, offer, tone, model, platform: platforms[i] })
             });
 
             const reader = response.body.getReader();
