@@ -5,19 +5,18 @@ const client = new Groq();
 export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
-    const { businessName, goal, offer, tone, platforms } = await request.json();
+    const { businessName, goal, offer, tone, platform } = await request.json();
 
-    if (!businessName || !goal || !tone || !platforms?.length) {
+    if (!businessName || !goal || !tone || !platform) {
         return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const platformList = platforms.join(', ');
     const prompt = `You are a creative marketing copywriter. Write marketing copy for:
     - Business: ${businessName}
     - Goal: ${goal}
     - Offer: ${offer}
     - Tone: ${tone}
-    - Platforms: ${platformList}`;
+    - Platform: ${platform}`;
 
 
     const stream = await client.chat.completions.create({

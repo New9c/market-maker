@@ -4,7 +4,6 @@ const threadsPreview = document.getElementById('threads-preview');
 const facebookPreview = document.getElementById('facebook-preview');
 const statusTag = document.getElementById('status-tag');
 
-let fullResponse = '';
 let currentPlatform = 'threads';
 
 form.addEventListener('submit', async (e) => {
@@ -28,49 +27,49 @@ form.addEventListener('submit', async (e) => {
     statusTag.textContent = 'Generating...';
     threadsPreview.textContent = '';
     facebookPreview.textContent = '';
-    fullResponse = '';
     currentPlatform = 'threads';
 
-    try {
-        const response = await fetch('/api/generate', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({businessName, goal, offer, tone, platforms})
-        });
+    for (let i in platforms) {
+        const platformID = document.getElementById(`${platforms[i]}-preview`);
+        try {
+            const response = await fetch('/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ businessName, goal, offer, tone, platform: platforms[i] })
+            });
 
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
 
-        while (true) {
-            const {done, value} = await reader.read();
-            if (done) break;
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
 
-            const chunk = decoder.decode(value);
-            const lines = chunk.split('\n');
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n');
 
-            for (const line of lines) {
-                if (line.startsWith('data: ')) {
-                    const data = line.slice(6);
-                    if (data === '[DONE]') continue;
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        const data = line.slice(6);
+                        if (data === '[DONE]') continue;
 
-                    try {
-                        const {content} = JSON.parse(data);
-                        fullResponse += content;
-                        updatePreviews(fullResponse);
-                    } catch (err) { }
+                        try {
+                            const { content } = JSON.parse(data);
+                            platformID.textContent = content || 'Failed to generate :c';
+                        } catch (err) { }
+                    }
                 }
             }
-        }
 
-        statusTag.textContent = 'Done! ✨';
-    } catch (error) {
-        console.error(error);
-        statusTag.textContent = 'Error';
-        threadsPreview.textContent = 'Failed to generate. Check your API key.';
-    } finally {
-        generateBtn.disabled = false;
-        generateBtn.classList.remove('loading');
+            statusTag.textContent = 'Done!';
+        } catch (error) {
+            console.error(error);
+            statusTag.textContent = 'Error';
+            platformID.textContent = 'Failed to generate :c';
+        }
     }
+    generateBtn.disabled = false;
+    generateBtn.classList.remove('loading');
 });
 
 function updatePreviews(text) {
