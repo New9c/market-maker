@@ -284,6 +284,26 @@ button {
   min-height: 1.65em;
   animation: typewriter 0.5s ease-out;
 }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.copy-btn {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.copy-btn:hover {
+  background: var(--primary);
+  color: white;
+}
 @keyframes typewriter {
   from { opacity: 0; }
   to { opacity: 1; }

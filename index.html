@@ -71,13 +71,19 @@
                 </div>
                 <div id="preview-container">
                     <article class="preview-card">
-                        <p class="platform">Threads</p>
+                        <div class="card-header">
+                            <p class="platform">Threads</p>
+                            <button class="copy-btn" onclick="copyToClipboard('threads-preview', this)">Copy</button>
+                        </div>
                         <p class="preview-text" id="threads-preview">
                             Your generated Threads post will appear here...
                         </p>
                     </article>
                     <article class="preview-card">
-                        <p class="platform">Facebook</p>
+                        <div class="card-header">
+                            <p class="platform">Facebook</p>
+                            <button class="copy-btn" onclick="copyToClipboard('facebook-preview', this)">Copy</button>
+                        </div>
                         <p class="preview-text" id="facebook-preview">
                             Your generated Facebook post will appear here...
                         </p>

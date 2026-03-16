@@ -87,3 +87,12 @@ function updatePreviews(text) {
         threadsPreview.textContent = text;
     }
 }
+
+async function copyToClipboard(elementId, btn) {
+    const text = document.getElementById(elementId).textContent;
+    if (!text || text.includes('will appear here')) return;
+    
+    await navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+}
