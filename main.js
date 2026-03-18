@@ -26,10 +26,31 @@ form.addEventListener('submit', async (e) => {
 
     generateBtn.disabled = true;
     generateBtn.classList.add('loading');
-    statusTag.textContent = 'Generating...';
+    statusTag.textContent = 'Checking content...';
     threadsPreview.textContent = '';
     facebookPreview.textContent = '';
     currentPlatform = 'threads';
+
+    try {
+        const checkResponse = await fetch('/api/check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ businessName, goal, offer, additional_prompt })
+        });
+
+        const { pass, reason, error } = await checkResponse.json();
+
+        if (error || !pass) {
+            statusTag.textContent = 'Blocked: ' + (reason || error || 'Inappropriate content');
+            generateBtn.disabled = false;
+            generateBtn.classList.remove('loading');
+            return;
+        }
+    } catch (error) {
+        console.error('Check failed:', error);
+    }
+
+    statusTag.textContent = 'Generating...';
 
     for (let i in platforms) {
         const platformID = document.getElementById(`${platforms[i].toLowerCase()}-preview`);
@@ -53,12 +74,9 @@ form.addEventListener('submit', async (e) => {
                 for (const line of lines) {
                     if (line.startsWith('data: ')) {
                         const data = line.slice(6);
-                        console.log("hi")
                         if (data === '[DONE]') continue;
-
                         try {
                             const { content } = JSON.parse(data);
-                            console.log(platformID.textContent)
                             platformID.textContent += content;
                         } catch (err) { }
                     }
