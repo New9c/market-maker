@@ -1,16 +1,9 @@
 import Groq from 'groq-sdk';
+import { HARMFUL_PATTERNS, checkForHarmfulContent } from './harmful-patterns.js';
 
 const client = new Groq();
 
 export const dynamic = 'force-dynamic';
-
-const HARMFUL_PATTERNS = [
-    /\b(drugs?|cocaine|heroin|marijuana|weed|cannabis|lsd|meth|amphetamine|fentanyl|opioids?|prescription\s*abuse)\b/i,
-    /\b(kill|suicide|self-harm|harm\s*others?|attack|murder)\b/i,
-    /\b(illegal\s*activities?|fraud|scam|phishing|hack|steal)\b/i,
-    /\b(hate\s*speech|racist|discriminat|nazi|extremist)\b/i,
-    /\b(sexually\s*explicit|porn|xxx)\b/i,
-];
 
 export async function POST(request) {
     const { businessName, goal, offer, additional_prompt } = await request.json();
@@ -21,10 +14,8 @@ export async function POST(request) {
 
     const combinedText = `${businessName} ${goal} ${offer} ${additional_prompt || ''}`;
 
-    for (const pattern of HARMFUL_PATTERNS) {
-        if (pattern.test(combinedText)) {
-            return Response.json({ pass: false, reason: 'Inappropriate content' });
-        }
+    if (checkForHarmfulContent(combinedText)) {
+        return Response.json({ pass: false, reason: 'Inappropriate content' });
     }
 
     const prompt = `You are a simple checker. Evaluate the following text for:
@@ -53,10 +44,8 @@ export async function POST(request) {
 
     try {
         const parsed = JSON.parse(content);
-        console.log(parsed)
         return Response.json(parsed);
     } catch {
-        console.log(response)
         return Response.json({ pass: false, reason: 'Failed to parse moderation response' });
     }
 }
