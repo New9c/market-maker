@@ -5,7 +5,7 @@ const client = new Groq();
 export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
-    const { businessName, goal, offer, tone, platform, model } = await request.json();
+    const { businessName, goal, offer, tone, platform, additional_prompt, model } = await request.json();
 
     if (!businessName || !goal || !tone || !platform) {
         return Response.json({ error: 'Missing required fields' }, { status: 400 });
@@ -17,8 +17,8 @@ export async function POST(request) {
     - Offer: ${offer}
     - Tone: ${tone}
     - Platform: ${platform}
-    Just make the post, don't have "Here's the post..." at the front or "This post has..." at the end. The post will be used in a copy paste way, so talk to the customer, not me`;
-
+    Just make the post, don't have "Here's the post..." at the front or "This post has..." at the end. The post will be used in a copy paste way, so talk to the customer, not me
+    ${additional_prompt}`;
 
     const stream = await client.chat.completions.create({
         model: model || 'meta-llama/llama-4-scout-17b-16e-instruct',

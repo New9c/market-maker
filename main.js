@@ -13,6 +13,7 @@ form.addEventListener('submit', async (e) => {
     const goal = document.getElementById('goal').value;
     const offer = document.getElementById('offer').value;
     const tone = document.getElementById('tone').value;
+    const additional_prompt = document.getElementById('additional-prompt').value;
     const model = document.getElementById('model').value;
     const platforms = [];
     if (document.getElementById('threads').checked) platforms.push('Threads');
@@ -36,7 +37,7 @@ form.addEventListener('submit', async (e) => {
             const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ businessName, goal, offer, tone, model, platform: platforms[i] })
+                body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: platforms[i] })
             });
 
             const reader = response.body.getReader();
@@ -92,7 +93,7 @@ function updatePreviews(text) {
 async function copyToClipboard(elementId, btn) {
     const text = document.getElementById(elementId).textContent;
     if (!text || text.includes('will appear here')) return;
-    
+
     await navigator.clipboard.writeText(text);
     btn.textContent = 'Copied!';
     setTimeout(() => btn.textContent = 'Copy', 2000);
