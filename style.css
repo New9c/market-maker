@@ -379,12 +379,6 @@ button {
     }
 }
 
-#preview-container:empty::after {
-    content: 'Your generated posts will appear here...';
-    color: var(--text-muted);
-    font-style: italic;
-}
-
 @media (max-width: 600px) {
     .input-actions {
         flex-direction: column;
