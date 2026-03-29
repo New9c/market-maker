@@ -8,7 +8,6 @@ const platforms = [
 const form = document.getElementById('generator-form');
 const generateBtn = document.getElementById('generate-btn');
 const previewText = document.getElementById('preview-text');
-const copyBtn = document.getElementById('copy-btn');
 const platformCheckboxes = document.getElementById('platform-checkboxes');
 const platformTabsContainer = document.getElementById('platform-tabs');
 
@@ -40,19 +39,6 @@ platformTabs.forEach(tab => {
     });
 });
 
-copyBtn.addEventListener('click', async () => {
-    if (!copyBtn.dataset.copyable) return;
-    const text = previewData[activePlatform];
-    if (!text) return;
-    await navigator.clipboard.writeText(text);
-    copyBtn.textContent = 'Copied!';
-    copyBtn.dataset.copyable = '';
-    setTimeout(() => {
-        copyBtn.textContent = 'Copy Text';
-        copyBtn.dataset.copyable = 'true';
-    }, 500);
-});
-
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -72,10 +58,9 @@ form.addEventListener('submit', async (e) => {
         return;
     }
 
+    const btnText = generateBtn.querySelector('.btn-text');
+    btnText.textContent = 'Checking...';
     generateBtn.disabled = true;
-    generateBtn.classList.add('loading');
-    copyBtn.textContent = 'Checking...';
-    copyBtn.dataset.copyable = '';
     platforms.forEach(p => previewData[p.id] = '');
     previewText.textContent = '';
 
@@ -89,7 +74,7 @@ form.addEventListener('submit', async (e) => {
         const { pass, reason, error } = await checkResponse.json();
 
         if (error || !pass) {
-            copyBtn.textContent = 'Blocked';
+            btnText.textContent = 'Blocked';
             generateBtn.disabled = false;
             generateBtn.classList.remove('loading');
             return;
@@ -98,7 +83,7 @@ form.addEventListener('submit', async (e) => {
         console.error('Check failed:', error);
     }
 
-    copyBtn.textContent = 'Generating...';
+    generateBtn.classList.add('loading');
 
     for (let i in selectedPlatforms) {
         const platformKey = selectedPlatforms[i].toLowerCase();
@@ -134,15 +119,18 @@ form.addEventListener('submit', async (e) => {
                 }
             }
 
-            copyBtn.textContent = 'Copy Text';
-            copyBtn.dataset.copyable = 'true';
+            btnText.textContent = 'Generate Post';
+
         } catch (error) {
             console.error(error);
-            copyBtn.textContent = 'Error';
+            btnText.textContent = 'Error';
+            generateBtn.disabled = false;
+            generateBtn.classList.remove('loading');
             previewData[platformKey] = 'Failed to generate :c';
             if (activePlatform === platformKey) {
                 previewText.textContent = previewData[platformKey];
             }
+            return;
         }
     }
     generateBtn.disabled = false;
