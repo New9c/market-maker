@@ -112,6 +112,16 @@ body {
     animation: slideIn 0.6s ease-out 0.2s both;
 }
 
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+}
+
+.form-grid .input-actions {
+    grid-column: 1 / -1;
+}
+
 .preview-panel {
     padding-left: 2rem;
     border-left: 2px solid var(--border);
@@ -175,9 +185,9 @@ select option {
 }
 
 .input-actions {
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .inline {
