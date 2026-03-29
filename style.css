@@ -382,8 +382,8 @@ button {
 
 .copy-btn[data-copyable] {
     background: linear-gradient(135deg, #45475a 0%, #313244 100%);
-    color: #cba6f7;
-    border: none;
+    color: var(--primary);
+    border: 2px solid var(--primary);
     cursor: pointer;
 }
 
