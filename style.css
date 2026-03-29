@@ -100,34 +100,15 @@ body {
     gap: 2rem;
 }
 
-.input-panel,
-.preview-panel {
-    padding: 2rem;
-    border-radius: 1.5rem;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    box-shadow: var(--shadow);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
 .input-panel {
+    padding-right: 2rem;
     animation: slideIn 0.6s ease-out 0.2s both;
 }
 
 .preview-panel {
+    padding-left: 2rem;
+    border-left: 2px solid var(--border);
     animation: slideIn 0.6s ease-out 0.3s both;
-}
-
-.input-panel:hover,
-.preview-panel:hover {
-    box-shadow: var(--shadow);
-}
-
-.input-panel h2,
-.preview-panel h2 {
-    margin: 0 0 1.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
 }
 
 label {
@@ -284,21 +265,6 @@ button {
     text-align: center;
 }
 
-.preview-heading {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.preview-heading h2 {
-    flex: 1;
-}
-
-.preview-heading .tag {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.75rem;
-}
-
 .platform-tabs {
     position: relative;
     display: flex;
@@ -402,14 +368,4 @@ button {
     }
 }
 
-@media (max-width: 600px) {
-    .input-actions {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
 
-    .input-panel,
-    .preview-panel {
-        padding: 1.5rem;
-    }
-}
