@@ -14,14 +14,14 @@
 
 <body>
     <main class="app-shell">
-        <header class="app-header">
-            <h1>Market Maker</h1>
-            <p class="lead">
-                Feed in your business detail, goal, and tone to get a nice marketing post!
-            </p>
-        </header>
+        <div class="left-panel">
+            <header class="app-header">
+                <h1>Market Maker</h1>
+                <p class="lead">
+                    Feed in your business detail, goal, and tone to get a nice marketing post!
+                </p>
+            </header>
 
-        <section class="content-grid">
             <form class="input-panel" id="generator-form">
                 <label>
                     Business Name
@@ -72,8 +72,9 @@
                     <span class="hint">Powered by Groq</span>
                 </div>
             </form>
+        </div>
 
-            <section class="preview-panel">
+        <section class="preview-panel">
                 <button class="copy-btn" id="copy-btn"></button>
                 <nav class="platform-tabs" id="platform-tabs"></nav>
                 <div id="preview-container">
