@@ -1,7 +1,6 @@
 const form = document.getElementById('generator-form');
 const generateBtn = document.getElementById('generate-btn');
 const previewText = document.getElementById('preview-text');
-const activePlatformLabel = document.getElementById('active-platform-label');
 const statusTag = document.getElementById('status-tag');
 const copyBtn = document.getElementById('copy-btn');
 const platformTabs = document.querySelectorAll('.platform-tab');
@@ -14,7 +13,6 @@ platformTabs.forEach(tab => {
         platformTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         activePlatform = tab.dataset.platform;
-        activePlatformLabel.textContent = activePlatform.charAt(0).toUpperCase() + activePlatform.slice(1);
         previewText.textContent = previewData[activePlatform] || 'Your generated post will appear here...';
     });
 });
