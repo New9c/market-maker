@@ -65,14 +65,7 @@
                         <option value="groq/compound-mini">Groq Compound Mini</option>
                     </select>
                 </label>
-                <div class="input-actions">
-                    <label class="inline">
-                        <input type="checkbox" id="threads" checked /> Threads
-                    </label>
-                    <label class="inline">
-                        <input type="checkbox" id="facebook" checked /> Facebook
-                    </label>
-                </div>
+                <div class="input-actions" id="platform-checkboxes"></div>
                 <div class="submit-row">
                     <button class="primary" type="submit" id="generate-btn">
                         <span class="btn-text">Generate Post</span>
@@ -88,10 +81,7 @@
                     <p class="tag" id="status-tag">Draft text</p>
                     <button class="copy-btn" id="copy-btn">Copy</button>
                 </div>
-                <nav class="platform-tabs">
-                    <button class="platform-tab active" data-platform="threads">Threads</button>
-                    <button class="platform-tab" data-platform="facebook">Facebook</button>
-                </nav>
+                <nav class="platform-tabs" id="platform-tabs"></nav>
                 <div id="preview-container">
                     <p class="preview-text" id="preview-text">
                         Your generated post will appear here...
