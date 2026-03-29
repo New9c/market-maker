@@ -87,23 +87,18 @@
                     <h2>Preview</h2>
                     <p class="tag" id="status-tag">Draft text</p>
                 </div>
+                <nav class="platform-tabs">
+                    <button class="platform-tab active" data-platform="threads">Threads</button>
+                    <button class="platform-tab" data-platform="facebook">Facebook</button>
+                </nav>
                 <div id="preview-container">
                     <article class="preview-card">
                         <div class="card-header">
-                            <p class="platform">Threads</p>
-                            <button class="copy-btn" onclick="copyToClipboard('threads-preview', this)">Copy</button>
+                            <p class="platform" id="active-platform-label">Threads</p>
+                            <button class="copy-btn" id="copy-btn">Copy</button>
                         </div>
-                        <p class="preview-text" id="threads-preview">
-                            Your generated Threads post will appear here...
-                        </p>
-                    </article>
-                    <article class="preview-card">
-                        <div class="card-header">
-                            <p class="platform">Facebook</p>
-                            <button class="copy-btn" onclick="copyToClipboard('facebook-preview', this)">Copy</button>
-                        </div>
-                        <p class="preview-text" id="facebook-preview">
-                            Your generated Facebook post will appear here...
+                        <p class="preview-text" id="preview-text">
+                            Your generated post will appear here...
                         </p>
                     </article>
                 </div>
