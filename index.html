@@ -13,82 +13,73 @@
 </head>
 
 <body>
-    <main class="app-shell">
-        <div class="left-panel">
-            <header class="app-header">
-                <h1>Market Maker</h1>
-                <p class="lead">
-                    Feed in your business detail, goal, and tone to get a nice marketing post!
-                </p>
-            </header>
+    <div class="left-panel">
+        <header class="app-header">
+            <h1>Market Maker</h1>
+        </header>
 
-            <form class="input-panel" id="generator-form">
-                <div class="form-grid">
-                    <label>
-                        Business Name
-                        <input type="text" id="businessName" placeholder="Blossom Coffee Shop" required />
-                    </label>
-                    <label>
-                        Campaign Goal
-                        <input type="text" id="goal" placeholder="Drive weekend walk-ins" required />
-                    </label>
-                    <label>
-                        Tone
-                        <select id="tone">
-                            <option>Friendly</option>
-                            <option>Professional</option>
-                            <option>Edgy</option>
-                            <option>Witty</option>
-                            <option>Inspiring</option>
-                        </select>
-                    </label>
-                    <label>
-                        Model
-                        <select id="model">
-                            <option value="openai/gpt-oss-120b">Gpt OSS 120B</option>
-                            <option value="openai/gpt-oss-20b">Gpt OSS 20B</option>
-                            <option value="meta-llama/llama-4-scout-17b-16e-instruct">Llama 4 Scout</option>
-                            <option value="meta-llama/llama-4-lite-17b-16e-instruct">Llama 4 Lite</option>
-                            <option value="llama-3.3-70b-versatile">Llama 3.3 Versatile</option>
-                            <option value="llama-3.1-8b-instant">Llama 3.1 Instant</option>
-                            <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
-                            <option value="groq/compound">Groq Compound</option>
-                            <option value="groq/compound-mini">Groq Compound Mini</option>
-                        </select>
-                    </label>
-                    <label>
-                        Offer
-                        <textarea id="offer" rows="3"
-                            placeholder="New seasonal drinks, 15% off on Saturdays"></textarea>
-                    </label>
-                    <label>
-                        Additional Prompts
-                        <textarea id="additional-prompt" rows="3"
-                            placeholder="Don't have hashtags in the post"></textarea>
-                    </label>
-                    <div class="input-actions" id="platform-checkboxes"></div>
-                </div>
-                <div class="submit-row">
-                    <button class="primary" type="submit" id="generate-btn">
-                        <span class="btn-text">Generate Post</span>
-                        <span class="btn-loader"></span>
-                    </button>
-                    <span class="hint">Powered by Groq</span>
-                </div>
-            </form>
-        </div>
-
-        <section class="preview-panel">
-            <button class="copy-btn" id="copy-btn"></button>
-            <nav class="platform-tabs" id="platform-tabs"></nav>
-            <div id="preview-container">
-                <p class="preview-text" id="preview-text">
-                    Your generated post will appear here...
-                </p>
+        <form class="input-panel" id="generator-form">
+            <div class="form-grid">
+                <label>
+                    Business Name
+                    <input type="text" id="businessName" placeholder="Blossom Coffee Shop" required />
+                </label>
+                <label>
+                    Campaign Goal
+                    <input type="text" id="goal" placeholder="Drive weekend walk-ins" required />
+                </label>
+                <label>
+                    Tone
+                    <select id="tone">
+                        <option>Friendly</option>
+                        <option>Professional</option>
+                        <option>Edgy</option>
+                        <option>Witty</option>
+                        <option>Inspiring</option>
+                    </select>
+                </label>
+                <label>
+                    Model
+                    <select id="model">
+                        <option value="openai/gpt-oss-120b">Gpt OSS 120B</option>
+                        <option value="openai/gpt-oss-20b">Gpt OSS 20B</option>
+                        <option value="meta-llama/llama-4-scout-17b-16e-instruct">Llama 4 Scout</option>
+                        <option value="meta-llama/llama-4-lite-17b-16e-instruct">Llama 4 Lite</option>
+                        <option value="llama-3.3-70b-versatile">Llama 3.3 Versatile</option>
+                        <option value="llama-3.1-8b-instant">Llama 3.1 Instant</option>
+                        <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+                        <option value="groq/compound">Groq Compound</option>
+                        <option value="groq/compound-mini">Groq Compound Mini</option>
+                    </select>
+                </label>
+                <label>
+                    Offer
+                    <textarea id="offer" rows="3" placeholder="New seasonal drinks, 15% off on Saturdays"></textarea>
+                </label>
+                <label>
+                    Additional Prompts
+                    <textarea id="additional-prompt" rows="3" placeholder="Don't have hashtags in the post"></textarea>
+                </label>
+                <div class="input-actions" id="platform-checkboxes"></div>
             </div>
-        </section>
-        </section>
-    </main>
+            <div class="submit-row">
+                <button class="primary" type="submit" id="generate-btn">
+                    <span class="btn-text">Generate Post</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <section class="preview-panel">
+        <button class="copy-btn" id="copy-btn"></button>
+        <nav class="platform-tabs" id="platform-tabs"></nav>
+        <div id="preview-container">
+            <p class="preview-text" id="preview-text">
+                Your generated post will appear here...
+            </p>
+        </div>
+    </section>
 
     <script src="main.js"> </script>
 </body>
