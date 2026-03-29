@@ -300,7 +300,6 @@ button {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 0.75rem;
 }
 
 .preview-heading h2 {
@@ -385,6 +384,7 @@ button {
     border: none;
     color: var(--text-muted);
     padding: 0.25rem 0.75rem;
+    margin-bottom: 1.5rem;
     border-radius: 999px;
     font-size: 0.7rem;
     font-weight: 600;
