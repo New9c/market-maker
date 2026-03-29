@@ -1,10 +1,31 @@
 const form = document.getElementById('generator-form');
 const generateBtn = document.getElementById('generate-btn');
-const threadsPreview = document.getElementById('threads-preview');
-const facebookPreview = document.getElementById('facebook-preview');
+const previewText = document.getElementById('preview-text');
+const activePlatformLabel = document.getElementById('active-platform-label');
 const statusTag = document.getElementById('status-tag');
+const copyBtn = document.getElementById('copy-btn');
+const platformTabs = document.querySelectorAll('.platform-tab');
 
-let currentPlatform = 'threads';
+const previewData = { threads: '', facebook: '' };
+let activePlatform = 'threads';
+
+platformTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        platformTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activePlatform = tab.dataset.platform;
+        activePlatformLabel.textContent = activePlatform.charAt(0).toUpperCase() + activePlatform.slice(1);
+        previewText.textContent = previewData[activePlatform] || 'Your generated post will appear here...';
+    });
+});
+
+copyBtn.addEventListener('click', async () => {
+    const text = previewData[activePlatform];
+    if (!text || text.includes('will appear here')) return;
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = 'Copied!';
+    setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+});
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -27,9 +48,9 @@ form.addEventListener('submit', async (e) => {
     generateBtn.disabled = true;
     generateBtn.classList.add('loading');
     statusTag.textContent = 'Checking content...';
-    threadsPreview.textContent = '';
-    facebookPreview.textContent = '';
-    currentPlatform = 'threads';
+    previewData.threads = '';
+    previewData.facebook = '';
+    previewText.textContent = '';
 
     try {
         const checkResponse = await fetch('/api/check', {
@@ -53,7 +74,7 @@ form.addEventListener('submit', async (e) => {
     statusTag.textContent = 'Generating...';
 
     for (let i in platforms) {
-        const platformID = document.getElementById(`${platforms[i].toLowerCase()}-preview`);
+        const platformKey = platforms[i].toLowerCase();
         try {
             const response = await fetch('/api/generate', {
                 method: 'POST',
@@ -77,7 +98,10 @@ form.addEventListener('submit', async (e) => {
                         if (data === '[DONE]') continue;
                         try {
                             const { content } = JSON.parse(data);
-                            platformID.textContent += content;
+                            previewData[platformKey] += content;
+                            if (activePlatform === platformKey) {
+                                previewText.textContent = previewData[platformKey];
+                            }
                         } catch (err) { }
                     }
                 }
@@ -87,32 +111,12 @@ form.addEventListener('submit', async (e) => {
         } catch (error) {
             console.error(error);
             statusTag.textContent = 'Error';
-            platformID.textContent = 'Failed to generate :c';
+            previewData[platformKey] = 'Failed to generate :c';
+            if (activePlatform === platformKey) {
+                previewText.textContent = previewData[platformKey];
+            }
         }
     }
     generateBtn.disabled = false;
     generateBtn.classList.remove('loading');
 });
-
-function updatePreviews(text) {
-    const sections = text.split(/threads|facebook/i);
-
-    if (sections.length > 1) {
-        const threadsText = sections[1]?.trim() || '';
-        const facebookText = sections[2]?.trim() || '';
-
-        threadsPreview.textContent = threadsText || threadsPreview.textContent;
-        facebookPreview.textContent = facebookText || facebookPreview.textContent;
-    } else {
-        threadsPreview.textContent = text;
-    }
-}
-
-async function copyToClipboard(elementId, btn) {
-    const text = document.getElementById(elementId).textContent;
-    if (!text || text.includes('will appear here')) return;
-
-    await navigator.clipboard.writeText(text);
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 2000);
-}
