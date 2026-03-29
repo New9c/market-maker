@@ -1,18 +1,18 @@
 :root {
     font-family: "Space Grotesk", "Inter", system-ui, -apple-system, sans-serif;
-    background-color: #f5f5f5;
-    color: #1b1b1b;
+    background-color: #1e1e2e;
+    color: #cdd6f4;
     line-height: 1.6;
-    --primary: #6366f1;
-    --primary-hover: #4f46e5;
-    --surface: #ffffff;
-    --bg: #f5f5f5;
-    --border: #e2e8f0;
-    --text: #1e293b;
-    --text-muted: #64748b;
+    --primary: #cba6f7;
+    --primary-hover: #b4befe;
+    --surface: #313244;
+    --bg: #1e1e2e;
+    --border: #45475a;
+    --text: #cdd6f4;
+    --text-muted: #a6adc8;
     --radius: 1rem;
-    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08), 0 12px 40px -4px rgba(0, 0, 0, 0.06);
-    --shadow-hover: 0 8px 30px -2px rgba(99, 102, 241, 0.15), 0 20px 50px -4px rgba(99, 102, 241, 0.1);
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 12px 40px -4px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 8px 30px -2px rgba(203, 166, 247, 0.15), 0 20px 50px -4px rgba(203, 166, 247, 0.1);
 }
 
 * {
@@ -23,8 +23,8 @@ body {
     margin: 0;
     background: var(--bg);
     background-image:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.08), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(168, 85, 247, 0.06), transparent);
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(203, 166, 247, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(166, 227, 161, 0.06), transparent);
     min-height: 100vh;
     animation: fadeIn 0.6s ease-out;
 }
@@ -70,7 +70,7 @@ body {
     margin: 0.75rem 0;
     font-size: clamp(2.2rem, 5vw, 3rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+    background: linear-gradient(135deg, #cba6f7 0%, #89b4fa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -85,9 +85,9 @@ body {
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-    color: #4338ca;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+    background: linear-gradient(135deg, #45475a 0%, #313244 100%);
+    color: #cba6f7;
+    box-shadow: 0 2px 8px rgba(203, 166, 247, 0.15);
 }
 
 .lead {
@@ -150,9 +150,10 @@ select {
     border-radius: 0.85rem;
     border: 2px solid var(--border);
     padding: 0.75rem 1rem;
-    background: #fafbfc;
+    background: #1e1e2e;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     font-size: 1rem;
+    color: #cdd6f4;
 }
 
 input:focus,
@@ -160,13 +161,13 @@ textarea:focus,
 select:focus {
     outline: none;
     border-color: var(--primary);
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    background: #181825;
+    box-shadow: 0 0 0 4px rgba(203, 166, 247, 0.1);
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: #94a3b8;
+    color: #6c7086;
 }
 
 textarea {
@@ -177,10 +178,15 @@ textarea {
 select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a6adc8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
+}
+
+select option {
+    background: #1e1e2e;
+    color: #cdd6f4;
 }
 
 .input-actions {
@@ -229,8 +235,8 @@ button {
 }
 
 .primary {
-    background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--primary) 0%, #89b4fa 100%);
+    color: #1e1e2e;
     position: relative;
     display: flex;
     overflow: hidden;
@@ -249,7 +255,7 @@ button {
 
 .primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 8px 25px rgba(203, 166, 247, 0.35);
 }
 
 .primary:hover::before {
@@ -269,8 +275,8 @@ button {
     display: none;
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #fff;
+    border: 2px solid rgba(30, 30, 46, 0.3);
+    border-top-color: #1e1e2e;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
@@ -393,15 +399,15 @@ button {
 }
 
 .copy-btn[data-copyable] {
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-    color: #4338ca;
+    background: linear-gradient(135deg, #45475a 0%, #313244 100%);
+    color: #cba6f7;
     border: none;
     cursor: pointer;
 }
 
 .copy-btn[data-copyable]:hover {
     background: var(--primary);
-    color: white;
+    color: #1e1e2e;
 }
 
 @keyframes typewriter {
