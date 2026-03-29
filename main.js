@@ -1,12 +1,36 @@
+const platforms = [
+    { id: 'threads', label: 'Threads' },
+    { id: 'facebook', label: 'Facebook' },
+    { id: 'instagram', label: 'Instagram' },
+    { id: 'line', label: 'LINE' }
+];
+
 const form = document.getElementById('generator-form');
 const generateBtn = document.getElementById('generate-btn');
 const previewText = document.getElementById('preview-text');
 const statusTag = document.getElementById('status-tag');
 const copyBtn = document.getElementById('copy-btn');
+const platformCheckboxes = document.getElementById('platform-checkboxes');
+const platformTabsContainer = document.getElementById('platform-tabs');
+
+platforms.forEach((platform, index) => {
+    const checkbox = document.createElement('label');
+    checkbox.className = 'inline';
+    checkbox.innerHTML = `<input type="checkbox" id="${platform.id}" ${index < 2 ? 'checked' : ''} /> ${platform.label}`;
+    platformCheckboxes.appendChild(checkbox);
+
+    const tab = document.createElement('button');
+    tab.className = `platform-tab ${index === 0 ? 'active' : ''}`;
+    tab.dataset.platform = platform.id;
+    tab.textContent = platform.label;
+    platformTabsContainer.appendChild(tab);
+});
+
 const platformTabs = document.querySelectorAll('.platform-tab');
 
-const previewData = { threads: '', facebook: '' };
-let activePlatform = 'threads';
+const previewData = {};
+platforms.forEach(p => previewData[p.id] = '');
+let activePlatform = platforms[0].id;
 
 platformTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -34,11 +58,12 @@ form.addEventListener('submit', async (e) => {
     const tone = document.getElementById('tone').value;
     const additional_prompt = document.getElementById('additional-prompt').value;
     const model = document.getElementById('model').value;
-    const platforms = [];
-    if (document.getElementById('threads').checked) platforms.push('Threads');
-    if (document.getElementById('facebook').checked) platforms.push('Facebook');
+    const selectedPlatforms = [];
+    platforms.forEach(p => {
+        if (document.getElementById(p.id).checked) selectedPlatforms.push(p.label);
+    });
 
-    if (platforms.length === 0) {
+    if (selectedPlatforms.length === 0) {
         alert('Please select at least one platform');
         return;
     }
@@ -46,8 +71,7 @@ form.addEventListener('submit', async (e) => {
     generateBtn.disabled = true;
     generateBtn.classList.add('loading');
     statusTag.textContent = 'Checking content...';
-    previewData.threads = '';
-    previewData.facebook = '';
+    platforms.forEach(p => previewData[p.id] = '');
     previewText.textContent = '';
 
     try {
@@ -71,13 +95,13 @@ form.addEventListener('submit', async (e) => {
 
     statusTag.textContent = 'Generating...';
 
-    for (let i in platforms) {
-        const platformKey = platforms[i].toLowerCase();
+    for (let i in selectedPlatforms) {
+        const platformKey = selectedPlatforms[i].toLowerCase();
         try {
             const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: platforms[i] })
+                body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: selectedPlatforms[i] })
             });
 
             const reader = response.body.getReader();
