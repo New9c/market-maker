@@ -1,0 +1,23 @@
+flowchart TD
+    A[建立 campaign brief] --> B[素材標準化]
+    B --> C{選擇通路}
+    C --> D1[Facebook Prompt]
+    C --> D2[Instagram Prompt]
+    C --> D3[Threads Prompt]
+    C --> D4[Email Prompt]
+    C --> D5[LINE 群組 Prompt]
+    C --> D6[Dcard Prompt]
+    D1 --> E[生成 A/B 版本]
+    D2 --> E
+    D3 --> E
+    D4 --> E
+    D5 --> E
+    D6 --> E
+    E --> F[規則檢查與 lint]
+    F --> G{是否合規}
+    G -->|否| H[補資料或改寫]
+    H --> C
+    G -->|是| I[人工審核]
+    I --> J[排程與發佈]
+    J --> K[蒐集成效數據]
+    K --> L[回寫版本庫與 Prompt 調整]

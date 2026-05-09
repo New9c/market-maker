@@ -12,8 +12,7 @@ cp .env.example .env  # Then add your GROQ_API_KEY
 ## Running
 
 ```bash
-npm start        # Production
-npm run dev      # Development with watch mode
+npx vercel dev
 ```
 
 ## Testing

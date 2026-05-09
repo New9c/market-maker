@@ -91,7 +91,19 @@ form.addEventListener('submit', async (e) => {
             const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: selectedPlatforms[i] })
+                // body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: selectedPlatforms[i] })
+                body: JSON.stringify({
+                    promotionTarget: "AI 實戰線下工作坊｜把宣傳文案流程做成可重複模板",
+                    targetAudience: "25–35 歲上班族",
+                    promotionStart: "2026-06-01",
+                    promotionEnd: "2026-06-15",
+                    eventDateTimeLocation: "2026-06-22 19:00–21:30，台北市大安區",
+                    registrationUrl: "https://example.com/workshop",
+                    brandVoice: "專業但不艱深，像懂行的同事",
+                    priceOffer: "原價 NT$3,600，早鳥 NT$2,880",
+                    quotaDeadline: "限額 30 名，6/15 截止",
+                    extraConstraints: "避免過度浮誇"
+                })
             });
 
             const reader = response.body.getReader();

@@ -1,28 +1,39 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import Groq from 'groq-sdk';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const client = new Groq();
 
 export const dynamic = 'force-dynamic';
 
+function generatePrompt(template, data) {
+    return template.replace(/{{\s*(\w+)\s*}}/g, (_, key) => {
+        if (!(key in data)) {
+            console.warn(`Warning: Template requires "${key}" but it was not provided.`);
+            return `[MISSING: ${key}]`;
+        }
+
+        const value = data[key];
+
+        if (Array.isArray(value)) {
+            return value.map(item => `\n- ${item}`).join('');
+        }
+
+        return String(value);
+    });
+}
+
 export async function POST(request) {
-    const { businessName, goal, offer, tone, platform, additional_prompt, model } = await request.json();
+    const template = fs.readFileSync(path.join(__dirname, './prompts/FacebookPrompt.md'), 'utf8');
 
-    if (!businessName || !goal || !tone || !platform) {
-        return Response.json({ error: 'Missing required fields' }, { status: 400 });
-    }
-
-    const prompt = `You are a creative marketing copywriter. Write a marketing post for:
-    - Business: ${businessName}
-    - Goal: ${goal}
-    - Offer: ${offer}
-    - Tone: ${tone}
-    - Platform: ${platform}
-    Just make the post, don't have "Here's the post..." at the front or "This post has..." at the end. The post will be used in a copy paste way, so talk to the customer, not me
-    ${additional_prompt}`;
+    const data = await request.json();
+    const thePrompt = generatePrompt(template, data);
 
     const stream = await client.chat.completions.create({
-        model: model || 'meta-llama/llama-4-scout-17b-16e-instruct',
-        messages: [{ role: 'user', content: prompt }],
+        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        messages: [{ role: 'user', content: thePrompt }],
         temperature: 1,
         max_completion_tokens: 1024,
         top_p: 1,
