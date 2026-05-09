@@ -11,7 +11,7 @@
 【輸入欄位】  
 - 宣傳標的：{{promotionTarget}}  
 - 目標對象：{{targetAudience}}  
-- 宣傳期間：{{promotionStart}} \~ {{promotionEnd}}  
+- 宣傳期間：{{promotionStart}} ~ {{promotionEnd}}  
 - 活動日期與地點：{{eventDateTimeLocation}}  
 - 主要賣點：{{keySellingPoints}}  
 - 活動流程/時間：{{eventFlow}}  

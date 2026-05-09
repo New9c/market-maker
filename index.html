@@ -21,43 +21,44 @@
         <form class="input-panel" id="generator-form">
             <div class="form-grid">
                 <label>
-                    Business Name
-                    <input type="text" id="businessName" placeholder="Blossom Coffee Shop" required />
+                    promotionTarget
+                    <input type="text" id="promotionTarget" placeholder="promotionTarget" required />
                 </label>
                 <label>
-                    Campaign Goal
-                    <input type="text" id="goal" placeholder="Drive weekend walk-ins" required />
+                    targetAudience
+                    <input type="text" id="targetAudience" placeholder="targetAudience" required />
                 </label>
                 <label>
-                    Tone
-                    <select id="tone">
-                        <option>Friendly</option>
-                        <option>Professional</option>
-                        <option>Edgy</option>
-                        <option>Witty</option>
-                        <option>Inspiring</option>
-                    </select>
+                    promotionStart
+                    <input type="text" id="promotionStart" placeholder="promotionStart" required />
                 </label>
                 <label>
-                    Model
-                    <select id="model">
-                        <option value="openai/gpt-oss-120b">Gpt OSS 120B</option>
-                        <option value="openai/gpt-oss-20b">Gpt OSS 20B</option>
-                        <option value="meta-llama/llama-4-scout-17b-16e-instruct">Llama 4 Scout</option>
-                        <option value="llama-3.3-70b-versatile">Llama 3.3 Versatile</option>
-                        <option value="llama-3.1-8b-instant">Llama 3.1 Instant</option>
-                        <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
-                        <option value="groq/compound">Groq Compound</option>
-                        <option value="groq/compound-mini">Groq Compound Mini</option>
-                    </select>
+                    promotionEnd
+                    <input type="text" id="promotionEnd" placeholder="promotionEnd" required />
                 </label>
                 <label>
-                    Offer
-                    <textarea id="offer" rows="3" placeholder="New seasonal drinks, 15% off on Saturdays"></textarea>
+                    eventDateTimeLocation
+                    <input type="text" id="eventDateTimeLocation" placeholder="eventDateTimeLocation" required />
                 </label>
                 <label>
-                    Additional Prompts
-                    <textarea id="additional-prompt" rows="3" placeholder="Don't have hashtags in the post"></textarea>
+                    registrationUrl
+                    <input type="text" id="registrationUrl" placeholder="registrationUrl" required />
+                </label>
+                <label>
+                    brandVoice
+                    <input type="text" id="brandVoice" placeholder="brandVoice" required />
+                </label>
+                <label>
+                    priceOffer
+                    <input type="text" id="priceOffer" placeholder="priceOffer" required />
+                </label>
+                <label>
+                    quotaDeadline
+                    <input type="text" id="quotaDeadline" placeholder="quotaDeadline" required />
+                </label>
+                <label>
+                    extraConstraints
+                    <input type="text" id="extraConstraints" placeholder="extraConstraints" />
                 </label>
                 <div class="input-actions" id="platform-checkboxes"></div>
             </div>

@@ -32,10 +32,10 @@ export async function POST(request) {
     const thePrompt = generatePrompt(template, data);
 
     const stream = await client.chat.completions.create({
-        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        model: 'openai/gpt-oss-120b',
         messages: [{ role: 'user', content: thePrompt }],
         temperature: 1,
-        max_completion_tokens: 1024,
+        max_completion_tokens: 1536,
         top_p: 1,
         stream: true,
     });

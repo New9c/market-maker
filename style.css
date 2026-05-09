@@ -37,7 +37,7 @@ body {
     min-height: 100vh;
     padding: 1rem 2rem;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 2fr;
 }
 
 .left-panel {
@@ -106,8 +106,8 @@ body {
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
 }
 
 .form-grid .input-actions {

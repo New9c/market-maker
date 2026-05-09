@@ -42,12 +42,7 @@ platformTabs.forEach(tab => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const businessName = document.getElementById('businessName').value;
-    const goal = document.getElementById('goal').value;
-    const offer = document.getElementById('offer').value;
-    const tone = document.getElementById('tone').value;
-    const additional_prompt = document.getElementById('additional-prompt').value;
-    const model = document.getElementById('model').value;
+    // const businessName = document.getElementById('businessName').value;
     const selectedPlatforms = [];
     platforms.forEach(p => {
         if (document.getElementById(p.id).checked) selectedPlatforms.push(p.label);
@@ -64,25 +59,6 @@ form.addEventListener('submit', async (e) => {
     platforms.forEach(p => previewData[p.id] = '');
     previewText.textContent = '';
 
-    try {
-        const checkResponse = await fetch('/api/check', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ businessName, goal, offer, additional_prompt })
-        });
-
-        const { pass, reason, error } = await checkResponse.json();
-
-        if (error || !pass) {
-            btnText.textContent = 'Blocked';
-            generateBtn.disabled = false;
-            generateBtn.classList.remove('loading');
-            return;
-        }
-    } catch (error) {
-        console.error('Check failed:', error);
-    }
-
     generateBtn.classList.add('loading');
 
     for (let i in selectedPlatforms) {
@@ -93,16 +69,16 @@ form.addEventListener('submit', async (e) => {
                 headers: { 'Content-Type': 'application/json' },
                 // body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: selectedPlatforms[i] })
                 body: JSON.stringify({
-                    promotionTarget: "AI 實戰線下工作坊｜把宣傳文案流程做成可重複模板",
-                    targetAudience: "25–35 歲上班族",
-                    promotionStart: "2026-06-01",
-                    promotionEnd: "2026-06-15",
-                    eventDateTimeLocation: "2026-06-22 19:00–21:30，台北市大安區",
-                    registrationUrl: "https://example.com/workshop",
-                    brandVoice: "專業但不艱深，像懂行的同事",
-                    priceOffer: "原價 NT$3,600，早鳥 NT$2,880",
-                    quotaDeadline: "限額 30 名，6/15 截止",
-                    extraConstraints: "避免過度浮誇"
+                    promotionTarget: document.getElementById('promotionTarget').value,
+                    targetAudience: document.getElementById('targetAudience').value,
+                    promotionStart: document.getElementById('promotionStart').value,
+                    promotionEnd: document.getElementById('promotionEnd').value,
+                    eventDateTimeLocation: document.getElementById('eventDateTimeLocation').value,
+                    registrationUrl: document.getElementById('registrationUrl').value,
+                    brandVoice: document.getElementById('brandVoice').value,
+                    priceOffer: document.getElementById('priceOffer').value,
+                    quotaDeadline: document.getElementById('quotaDeadline').value,
+                    extraConstraints: document.getElementById('extraConstraints').value
                 })
             });
 
