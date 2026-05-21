@@ -16,11 +16,11 @@ const platformTabsContainer = document.getElementById('platform-tabs');
 platforms.forEach((platform, index) => {
     const checkbox = document.createElement('label');
     checkbox.className = 'inline';
-    checkbox.innerHTML = `<input type="checkbox" id="${platform.id}" ${index < 2 ? 'checked' : ''} /> ${platform.label}`;
+    checkbox.innerHTML = `<input type="checkbox" id="${platform.id}" ${index < 1 ? 'checked' : ''} /> ${platform.label}`;
     platformCheckboxes.appendChild(checkbox);
 
     const tab = document.createElement('button');
-    tab.className = `platform-tab ${index === 0 ? 'active' : ''}`;
+    tab.className = `${platform.id} platform-tab ${index === 0 ? 'active' : ''}`;
     tab.dataset.platform = platform.id;
     tab.textContent = platform.label;
     platformTabsContainer.appendChild(tab);

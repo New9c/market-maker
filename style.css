@@ -284,7 +284,7 @@ button {
 .platform-tabs {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 1rem;
     padding-bottom: 2px;
 }
@@ -384,6 +384,7 @@ button {
     }
 }
 
+.facebook,
 .threads,
 .instagram,
 .line,
@@ -392,22 +393,26 @@ button {
     display: none;
 }
 
-.form-grid:has(#threads:checked) .threads {
+:has(#facebook:checked) .facebook {
     display: flex;
 }
 
-.form-grid:has(#instagram:checked) .instagram {
+:has(#threads:checked) .threads {
     display: flex;
 }
 
-.form-grid:has(#dcard:checked) .dcard {
+:has(#instagram:checked) .instagram {
     display: flex;
 }
 
-.form-grid:has(#line:checked) .line {
+:has(#dcard:checked) .dcard {
     display: flex;
 }
 
-.form-grid:has(#email:checked) .email {
+:has(#line:checked) .line {
+    display: flex;
+}
+
+:has(#email:checked) .email {
     display: flex;
 }
