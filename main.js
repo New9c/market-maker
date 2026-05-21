@@ -37,7 +37,7 @@ platformTabs.forEach(tab => {
         platformTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         activePlatform = tab.dataset.platform;
-        previewText.textContent = previewData[activePlatform] || 'Your generated post will appear here...';
+        previewText.textContent = previewData[activePlatform] || '';
     });
 });
 
