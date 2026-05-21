@@ -87,6 +87,7 @@ form.addEventListener('submit', async (e) => {
                     priceOffer: document.getElementById('priceOffer').value,
                     quotaDeadline: document.getElementById('quotaDeadline').value,
                     isCommercialEvent: document.getElementById('isCommercialEvent').value,
+                    instagramPostType: document.getElementById('instagramPostType').value,
                     extraConstraints: document.getElementById('extraConstraints').value
                 })
             });

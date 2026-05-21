@@ -384,9 +384,14 @@ button {
     }
 }
 
+.instagram,
 .line,
 .dcard {
     display: none;
+}
+
+.form-grid:has(#instagram:checked) .instagram {
+    display: flex;
 }
 
 .form-grid:has(#dcard:checked) .dcard {
