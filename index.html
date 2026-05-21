@@ -20,6 +20,22 @@
 
         <form class="input-panel" id="generator-form">
             <div class="form-grid">
+                <label>
+                    宣傳標的：
+                    <input type="text" id="promotionTarget" placeholder="promotionTarget" required />
+                </label>
+                <label>
+                    目標對象：
+                    <input type="text" id="targetAudience" placeholder="targetAudience" required />
+                </label>
+                <label>
+                    宣傳開始：
+                    <input type="text" id="promotionStart" placeholder="promotionStart" required />
+                </label>
+                <label>
+                    宣傳結束：
+                    <input type="text" id="promotionEnd" placeholder="promotionEnd" required />
+                </label>
                 <label class="dcard">
                     dcardMode
                     <select id="dcardMode">
@@ -28,63 +44,47 @@
                     </select>
                 </label>
                 <label>
-                    promotionTarget
-                    <input type="text" id="promotionTarget" placeholder="promotionTarget" required />
-                </label>
-                <label>
-                    targetAudience
-                    <input type="text" id="targetAudience" placeholder="targetAudience" required />
-                </label>
-                <label>
-                    promotionStart
-                    <input type="text" id="promotionStart" placeholder="promotionStart" required />
-                </label>
-                <label>
-                    promotionEnd
-                    <input type="text" id="promotionEnd" placeholder="promotionEnd" required />
-                </label>
-                <label>
-                    eventDateTimeLocation
+                    活動日期與地點：
                     <input type="text" id="eventDateTimeLocation" placeholder="eventDateTimeLocation" required />
                 </label>
                 <label>
-                    keySellingPoints
+                    主要賣點：
                     <input type="text" id="keySellingPoints" placeholder="keySellingPoints" required />
                 </label>
                 <label>
-                    eventFlow
+                    活動流程/時間：
                     <input type="text" id="eventFlow" placeholder="eventFlow" required />
                 </label>
                 <label>
-                    imageBrief(Optional)
+                    圖片說明：(非必須)
                     <input type="text" id="imageBrief" placeholder="imageBrief" />
                 </label>
                 <label>
-                    registrationUrl
+                    報名/購買連結：
                     <input type="text" id="registrationUrl" placeholder="registrationUrl" required />
                 </label>
                 <label class="email">
-                    unsubscribeUrl
+                    退訂連結：
                     <input type="text" id="unsubscribeUrl" placeholder="unsubscribeUrl" />
                 </label>
                 <label>
-                    brandVoice
+                    品牌語調：
                     <input type="text" id="brandVoice" placeholder="brandVoice" required />
                 </label>
                 <label class="threads">
-                    threadsTopicTag
+                    topicTag
                     <input type="text" id="threadsTopicTag" placeholder="threadsTopicTag" />
                 </label>
                 <label>
-                    priceOffer
+                    價格/優惠：
                     <input type="text" id="priceOffer" placeholder="priceOffer" required />
                 </label>
                 <label>
-                    quotaDeadline
+                    名額/截止資訊：
                     <input type="text" id="quotaDeadline" placeholder="quotaDeadline" required />
                 </label>
                 <label class="line">
-                    lineGroupType
+                    群組屬性：
                     <select id="lineGroupType">
                         <option value="close_friends">close_friends</option>
                         <option value="alumni">alumni</option>
@@ -93,14 +93,14 @@
                     </select>
                 </label>
                 <label class="dcard">
-                    isCommercialEvent
+                    是否屬商業／售票活動：
                     <select id="isCommercialEvent">
-                        <option value="true">true</option>
-                        <option value="false">false</option>
+                        <option value="true">是</option>
+                        <option value="false">否</option>
                     </select>
                 </label>
                 <label class="instagram">
-                    instagramPostType
+                    發文類型：
                     <select id="instagramPostType">
                         <option value="feed_caption">feed_caption</option>
                         <option value="reels_caption">reels_caption</option>
@@ -108,7 +108,7 @@
                     </select>
                 </label>
                 <label>
-                    extraConstraints
+                    其他限制：
                     <input type="text" id="extraConstraints" placeholder="extraConstraints" />
                 </label>
                 <div class="input-actions" id="platform-checkboxes"></div>
@@ -126,7 +126,6 @@
         <nav class="platform-tabs" id="platform-tabs"></nav>
         <div id="preview-container">
             <p class="preview-text" id="preview-text">
-                Your generated post will appear here...
             </p>
         </div>
     </section>
