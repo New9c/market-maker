@@ -1,8 +1,8 @@
 const platforms = [
-    { id: 'threads', label: 'Threads' },
     { id: 'facebook', label: 'Facebook' },
-    { id: 'instagram', label: 'Instagram' },
-    { id: 'line', label: 'LINE' }
+    //{ id: 'threads', label: 'Threads' },
+    //{ id: 'instagram', label: 'Instagram' },
+    //{ id: 'line', label: 'LINE' }
 ];
 
 const form = document.getElementById('generator-form');
@@ -101,6 +101,7 @@ form.addEventListener('submit', async (e) => {
                             previewData[platformKey] += content;
                             if (activePlatform === platformKey) {
                                 previewText.textContent = previewData[platformKey];
+                                //previewText.textContent = previewData[platformKey].replace("**版本B**", '\n\n\n**版本B**');
                             }
                         } catch (err) { }
                     }
