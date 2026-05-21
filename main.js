@@ -81,6 +81,7 @@ form.addEventListener('submit', async (e) => {
                     eventFlow: document.getElementById('eventFlow').value,
                     eventDateTimeLocation: document.getElementById('eventDateTimeLocation').value,
                     registrationUrl: document.getElementById('registrationUrl').value,
+                    unsubscribeUrl: document.getElementById('unsubscribeUrl').value,
                     hasImageBrief: document.getElementById('imageBrief').value ? 'true' : 'false',
                     imageBrief: document.getElementById('imageBrief').value || 'None',
                     brandVoice: document.getElementById('brandVoice').value,

@@ -387,7 +387,8 @@ button {
 .threads,
 .instagram,
 .line,
-.dcard {
+.dcard,
+.email {
     display: none;
 }
 
@@ -404,5 +405,9 @@ button {
 }
 
 .form-grid:has(#line:checked) .line {
+    display: flex;
+}
+
+.form-grid:has(#email:checked) .email {
     display: flex;
 }
