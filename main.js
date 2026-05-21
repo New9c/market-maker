@@ -1,8 +1,10 @@
 const platforms = [
     { id: 'facebook', label: 'Facebook' },
-    //{ id: 'threads', label: 'Threads' },
-    //{ id: 'instagram', label: 'Instagram' },
-    //{ id: 'line', label: 'LINE' }
+    { id: 'threads', label: 'Threads' },
+    { id: 'instagram', label: 'Instagram' },
+    { id: 'line', label: 'LINE' },
+    { id: 'dcard', label: 'Dcard' },
+    { id: 'email', label: 'Email' }
 ];
 
 const form = document.getElementById('generator-form');
@@ -69,15 +71,22 @@ form.addEventListener('submit', async (e) => {
                 headers: { 'Content-Type': 'application/json' },
                 // body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: selectedPlatforms[i] })
                 body: JSON.stringify({
+                    platform: selectedPlatforms[i],
+                    dcardMode: document.getElementById('dcardMode').value,
                     promotionTarget: document.getElementById('promotionTarget').value,
                     targetAudience: document.getElementById('targetAudience').value,
                     promotionStart: document.getElementById('promotionStart').value,
                     promotionEnd: document.getElementById('promotionEnd').value,
+                    keySellingPoints: document.getElementById('keySellingPoints').value,
+                    eventFlow: document.getElementById('eventFlow').value,
                     eventDateTimeLocation: document.getElementById('eventDateTimeLocation').value,
                     registrationUrl: document.getElementById('registrationUrl').value,
+                    hasImageBrief: document.getElementById('imageBrief').value ? 'true' : 'false',
+                    imageBrief: document.getElementById('imageBrief').value || 'None',
                     brandVoice: document.getElementById('brandVoice').value,
                     priceOffer: document.getElementById('priceOffer').value,
                     quotaDeadline: document.getElementById('quotaDeadline').value,
+                    isCommercialEvent: document.getElementById('isCommercialEvent').value,
                     extraConstraints: document.getElementById('extraConstraints').value
                 })
             });

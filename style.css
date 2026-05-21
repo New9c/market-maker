@@ -383,3 +383,16 @@ button {
         opacity: 1;
     }
 }
+
+.line,
+.dcard {
+    display: none;
+}
+
+.form-grid:has(#dcard:checked) .dcard {
+    display: flex;
+}
+
+.form-grid:has(#line:checked) .line {
+    display: flex;
+}

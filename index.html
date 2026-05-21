@@ -20,6 +20,13 @@
 
         <form class="input-panel" id="generator-form">
             <div class="form-grid">
+                <label class="dcard">
+                    dcardMode
+                    <select id="dcardMode">
+                        <option value="organic_community">organic_community</option>
+                        <option value="official_ad">official_ad</option>
+                    </select>
+                </label>
                 <label>
                     promotionTarget
                     <input type="text" id="promotionTarget" placeholder="promotionTarget" required />
@@ -41,6 +48,18 @@
                     <input type="text" id="eventDateTimeLocation" placeholder="eventDateTimeLocation" required />
                 </label>
                 <label>
+                    keySellingPoints
+                    <input type="text" id="keySellingPoints" placeholder="keySellingPoints" required />
+                </label>
+                <label>
+                    eventFlow
+                    <input type="text" id="eventFlow" placeholder="eventFlow" required />
+                </label>
+                <label>
+                    imageBrief(Optional)
+                    <input type="text" id="imageBrief" placeholder="imageBrief" />
+                </label>
+                <label>
                     registrationUrl
                     <input type="text" id="registrationUrl" placeholder="registrationUrl" required />
                 </label>
@@ -55,6 +74,13 @@
                 <label>
                     quotaDeadline
                     <input type="text" id="quotaDeadline" placeholder="quotaDeadline" required />
+                </label>
+                <label class="dcard">
+                    isCommercialEvent
+                    <select id="isCommercialEvent">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
                 </label>
                 <label>
                     extraConstraints
