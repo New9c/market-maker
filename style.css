@@ -384,10 +384,15 @@ button {
     }
 }
 
+.threads,
 .instagram,
 .line,
 .dcard {
     display: none;
+}
+
+.form-grid:has(#threads:checked) .threads {
+    display: flex;
 }
 
 .form-grid:has(#instagram:checked) .instagram {

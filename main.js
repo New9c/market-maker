@@ -84,6 +84,7 @@ form.addEventListener('submit', async (e) => {
                     hasImageBrief: document.getElementById('imageBrief').value ? 'true' : 'false',
                     imageBrief: document.getElementById('imageBrief').value || 'None',
                     brandVoice: document.getElementById('brandVoice').value,
+                    threadsTopicTag: document.getElementById('threadsTopicTag').value,
                     priceOffer: document.getElementById('priceOffer').value,
                     quotaDeadline: document.getElementById('quotaDeadline').value,
                     isCommercialEvent: document.getElementById('isCommercialEvent').value,
