@@ -2,12 +2,7 @@
   "name": "docs-maker",
   "version": "1.0.0",
   "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "start": "node server.js",
-    "dev": "node --watch server.js"
-  },
+  "scripts": {},
   "dependencies": {
     "dotenv": "^16.4.5",
     "groq-sdk": "^1.1.1"
