@@ -16,7 +16,7 @@ const platformTabsContainer = document.getElementById('platform-tabs');
 platforms.forEach((platform, index) => {
     const checkbox = document.createElement('label');
     checkbox.className = 'inline';
-    checkbox.innerHTML = `<input type="checkbox" id="${platform.id}" ${index === 1 ? 'checked' : ''} /> ${platform.label}`;
+    checkbox.innerHTML = `<input type="checkbox" id="${platform.id}" ${index === 0 ? 'checked' : ''} /> ${platform.label}`;
     checkbox.addEventListener('click', () => {
         platformTabs.forEach(t => t.classList.remove('active'));
         for (const t of platformTabs) {
