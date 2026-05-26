@@ -109,11 +109,11 @@ async function writePost(platform) {
             }
         }
 
-        btnText.textContent = 'Generate Post';
+        btnText.textContent = '開始製作';
 
     } catch (error) {
         console.error(error);
-        btnText.textContent = 'Error';
+        btnText.textContent = '錯誤';
         generateBtn.disabled = false;
         generateBtn.classList.remove('loading');
         previewData[platformKey] = 'Failed to generate :c';
@@ -136,9 +136,6 @@ form.addEventListener('submit', async (e) => {
         alert('Please select at least one platform');
         return;
     }
-
-    const btnText = generateBtn.querySelector('.btn-text');
-    btnText.textContent = 'Checking...';
     generateBtn.disabled = true;
     platforms.forEach(p => previewData[p.id] = '');
     previewText.textContent = '';

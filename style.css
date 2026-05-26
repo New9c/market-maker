@@ -349,31 +349,6 @@ button {
     gap: 1rem;
 }
 
-.copy-btn {
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    padding: 0.25rem 0.75rem;
-    margin-bottom: 1.5rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    font-family: inherit;
-    transition: all 0.2s ease;
-}
-
-.copy-btn[data-copyable] {
-    background: linear-gradient(135deg, #45475a 0%, #313244 100%);
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    cursor: pointer;
-}
-
-.copy-btn[data-copyable]:hover {
-    background: var(--primary);
-    color: #1e1e2e;
-}
-
 @keyframes typewriter {
     from {
         opacity: 0;
