@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 
 <head>
     <meta charset="UTF-8" />
@@ -15,81 +15,81 @@
 <body>
     <div class="left-panel">
         <header class="app-header">
-            <h1>Market Maker</h1>
+            <h1>宣傳幫手</h1>
         </header>
 
         <form class="input-panel" id="generator-form">
             <div class="form-grid">
                 <label>
                     宣傳標的：
-                    <input type="text" id="promotionTarget" placeholder="promotionTarget" required />
+                    <input type="text" id="promotionTarget" required />
                 </label>
                 <label>
                     目標對象：
-                    <input type="text" id="targetAudience" placeholder="targetAudience" required />
+                    <input type="text" id="targetAudience" required />
                 </label>
                 <label>
                     宣傳開始：
-                    <input type="text" id="promotionStart" placeholder="promotionStart" required />
+                    <input type="text" id="promotionStart" required />
                 </label>
                 <label>
                     宣傳結束：
-                    <input type="text" id="promotionEnd" placeholder="promotionEnd" required />
+                    <input type="text" id="promotionEnd" required />
                 </label>
                 <label class="dcard">
-                    dcardMode
+                    Dcard發文類型：
                     <select id="dcardMode">
-                        <option value="organic_community">organic_community</option>
-                        <option value="official_ad">official_ad</option>
+                        <option value="organic_community">一般貼文</option>
+                        <option value="official_ad">廣告</option>
                     </select>
                 </label>
                 <label>
                     活動日期與地點：
-                    <input type="text" id="eventDateTimeLocation" placeholder="eventDateTimeLocation" required />
+                    <input type="text" id="eventDateTimeLocation" required />
                 </label>
                 <label>
                     主要賣點：
-                    <input type="text" id="keySellingPoints" placeholder="keySellingPoints" required />
+                    <input type="text" id="keySellingPoints" required />
                 </label>
                 <label>
                     活動流程/時間：
-                    <input type="text" id="eventFlow" placeholder="eventFlow" required />
+                    <input type="text" id="eventFlow" required />
                 </label>
                 <label>
                     圖片說明：(非必須)
-                    <input type="text" id="imageBrief" placeholder="imageBrief" />
+                    <input type="text" id="imageBrief" />
                 </label>
                 <label>
                     報名/購買連結：
-                    <input type="text" id="registrationUrl" placeholder="registrationUrl" required />
+                    <input type="text" id="registrationUrl" required />
                 </label>
                 <label class="email">
                     退訂連結：
-                    <input type="text" id="unsubscribeUrl" placeholder="unsubscribeUrl" />
+                    <input type="text" id="unsubscribeUrl" />
                 </label>
                 <label>
                     品牌語調：
-                    <input type="text" id="brandVoice" placeholder="brandVoice" required />
+                    <input type="text" id="brandVoice" required />
                 </label>
                 <label class="threads">
-                    topicTag
-                    <input type="text" id="threadsTopicTag" placeholder="threadsTopicTag" />
+                    Threads標籤：
+                    <input type="text" id="threadsTopicTag" />
                 </label>
                 <label>
                     價格/優惠：
-                    <input type="text" id="priceOffer" placeholder="priceOffer" required />
+                    <input type="text" id="priceOffer" required />
                 </label>
                 <label>
                     名額/截止資訊：
-                    <input type="text" id="quotaDeadline" placeholder="quotaDeadline" required />
+                    <input type="text" id="quotaDeadline" required />
                 </label>
                 <label class="line">
                     群組屬性：
                     <select id="lineGroupType">
-                        <option value="close_friends">close_friends</option>
-                        <option value="alumni">alumni</option>
-                        <option value="work_group">work_group</option>
-                        <option value="community">community</option>
+                        <option value="close_friends">朋友群</option>
+                        <option value="alumni">校友群</option>
+                        <option value="work_group">工作群</option>
+                        <option value="community">LINE社群</option>
                     </select>
                 </label>
                 <label class="dcard">
@@ -102,20 +102,20 @@
                 <label class="instagram">
                     發文類型：
                     <select id="instagramPostType">
-                        <option value="feed_caption">feed_caption</option>
-                        <option value="reels_caption">reels_caption</option>
-                        <option value="carousel">carousel</option>
+                        <option value="feed_caption">動態貼文</option>
+                        <option value="reels_caption">Reels貼文</option>
+                        <option value="carousel">輪播貼文</option>
                     </select>
                 </label>
                 <label>
                     其他限制：
-                    <input type="text" id="extraConstraints" placeholder="extraConstraints" />
+                    <input type="text" id="extraConstraints" />
                 </label>
                 <div class="input-actions" id="platform-checkboxes"></div>
             </div>
             <div class="submit-row">
                 <button class="primary" type="submit" id="generate-btn">
-                    <span class="btn-text">Generate Post</span>
+                    <span class="btn-text">開始製作</span>
                     <span class="btn-loader"></span>
                 </button>
             </div>
