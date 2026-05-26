@@ -52,10 +52,81 @@ platformTabs.forEach(tab => {
     });
 });
 
+async function writePost(platform) {
+    const platformKey = platform.toLowerCase();
+    const btnText = generateBtn.querySelector('.btn-text');
+    try {
+        const response = await fetch('/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                platform: platform,
+                dcardMode: document.getElementById('dcardMode').value,
+                promotionTarget: document.getElementById('promotionTarget').value,
+                targetAudience: document.getElementById('targetAudience').value,
+                promotionStart: document.getElementById('promotionStart').value,
+                promotionEnd: document.getElementById('promotionEnd').value,
+                keySellingPoints: document.getElementById('keySellingPoints').value,
+                eventFlow: document.getElementById('eventFlow').value,
+                eventDateTimeLocation: document.getElementById('eventDateTimeLocation').value,
+                registrationUrl: document.getElementById('registrationUrl').value,
+                unsubscribeUrl: document.getElementById('unsubscribeUrl').value,
+                hasImageBrief: document.getElementById('imageBrief').value ? 'true' : 'false',
+                imageBrief: document.getElementById('imageBrief').value || 'None',
+                brandVoice: document.getElementById('brandVoice').value,
+                threadsTopicTag: document.getElementById('threadsTopicTag').value,
+                priceOffer: document.getElementById('priceOffer').value,
+                quotaDeadline: document.getElementById('quotaDeadline').value,
+                lineGroupType: document.getElementById('lineGroupType').value,
+                isCommercialEvent: document.getElementById('isCommercialEvent').value,
+                instagramPostType: document.getElementById('instagramPostType').value,
+                extraConstraints: document.getElementById('extraConstraints').value
+            })
+        });
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value);
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    const data = line.slice(6);
+                    if (data === '[DONE]') continue;
+                    try {
+                        const { content } = JSON.parse(data);
+                        previewData[platformKey] += content;
+                        if (activePlatform === platformKey) {
+                            previewText.textContent = previewData[platformKey];
+                        }
+                    } catch (err) { }
+                }
+            }
+        }
+
+        btnText.textContent = 'Generate Post';
+
+    } catch (error) {
+        console.error(error);
+        btnText.textContent = 'Error';
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('loading');
+        previewData[platformKey] = 'Failed to generate :c';
+        if (activePlatform === platformKey) {
+            previewText.textContent = previewData[platformKey];
+        }
+        return;
+    }
+}
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // const businessName = document.getElementById('businessName').value;
     const selectedPlatforms = [];
     platforms.forEach(p => {
         if (document.getElementById(p.id).checked) selectedPlatforms.push(p.label);
@@ -73,79 +144,9 @@ form.addEventListener('submit', async (e) => {
     previewText.textContent = '';
 
     generateBtn.classList.add('loading');
+    const platformPromises = selectedPlatforms.map(async platform => writePost(platform));
+    await Promise.allSettled(platformPromises);
 
-    for (let i in selectedPlatforms) {
-        const platformKey = selectedPlatforms[i].toLowerCase();
-        try {
-            const response = await fetch('/api/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                // body: JSON.stringify({ businessName, goal, offer, tone, model, additional_prompt, platform: selectedPlatforms[i] })
-                body: JSON.stringify({
-                    platform: selectedPlatforms[i],
-                    dcardMode: document.getElementById('dcardMode').value,
-                    promotionTarget: document.getElementById('promotionTarget').value,
-                    targetAudience: document.getElementById('targetAudience').value,
-                    promotionStart: document.getElementById('promotionStart').value,
-                    promotionEnd: document.getElementById('promotionEnd').value,
-                    keySellingPoints: document.getElementById('keySellingPoints').value,
-                    eventFlow: document.getElementById('eventFlow').value,
-                    eventDateTimeLocation: document.getElementById('eventDateTimeLocation').value,
-                    registrationUrl: document.getElementById('registrationUrl').value,
-                    unsubscribeUrl: document.getElementById('unsubscribeUrl').value,
-                    hasImageBrief: document.getElementById('imageBrief').value ? 'true' : 'false',
-                    imageBrief: document.getElementById('imageBrief').value || 'None',
-                    brandVoice: document.getElementById('brandVoice').value,
-                    threadsTopicTag: document.getElementById('threadsTopicTag').value,
-                    priceOffer: document.getElementById('priceOffer').value,
-                    quotaDeadline: document.getElementById('quotaDeadline').value,
-                    lineGroupType: document.getElementById('lineGroupType').value,
-                    isCommercialEvent: document.getElementById('isCommercialEvent').value,
-                    instagramPostType: document.getElementById('instagramPostType').value,
-                    extraConstraints: document.getElementById('extraConstraints').value
-                })
-            });
-
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        const data = line.slice(6);
-                        if (data === '[DONE]') continue;
-                        try {
-                            const { content } = JSON.parse(data);
-                            previewData[platformKey] += content;
-                            if (activePlatform === platformKey) {
-                                previewText.textContent = previewData[platformKey];
-                                //previewText.textContent = previewData[platformKey].replace("**版本B**", '\n\n\n**版本B**');
-                            }
-                        } catch (err) { }
-                    }
-                }
-            }
-
-            btnText.textContent = 'Generate Post';
-
-        } catch (error) {
-            console.error(error);
-            btnText.textContent = 'Error';
-            generateBtn.disabled = false;
-            generateBtn.classList.remove('loading');
-            previewData[platformKey] = 'Failed to generate :c';
-            if (activePlatform === platformKey) {
-                previewText.textContent = previewData[platformKey];
-            }
-            return;
-        }
-    }
     generateBtn.disabled = false;
     generateBtn.classList.remove('loading');
 });
