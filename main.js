@@ -52,9 +52,43 @@ platformTabs.forEach(tab => {
     });
 });
 
+let retryTimer = null;
+const contentStarted = new Set();
+
+function showRetryCountdown(delay, platformKey) {
+    let remaining = Math.ceil(delay);
+
+    clearInterval(retryTimer);
+    previewData[platformKey] = `等候中（剩${remaining}秒）`;
+    if (activePlatform === platformKey) {
+        previewText.textContent = previewData[platformKey];
+    }
+
+    const tick = () => {
+        remaining--;
+        if (remaining <= 0) {
+            clearInterval(retryTimer);
+            retryTimer = null;
+            return;
+        }
+        previewData[platformKey] = `等候中（剩${remaining}秒）`;
+        if (activePlatform === platformKey) {
+            previewText.textContent = previewData[platformKey];
+        }
+    };
+    retryTimer = setInterval(tick, 1000);
+}
+
+function clearRetryStatus() {
+    if (retryTimer) {
+        clearInterval(retryTimer);
+        retryTimer = null;
+    }
+}
+
 async function writePost(platform) {
     const platformKey = platform.toLowerCase();
-    const btnText = generateBtn.querySelector('.btn-text');
+    contentStarted.delete(platformKey);
     try {
         const response = await fetch('/api/generate', {
             method: 'POST',
@@ -84,6 +118,15 @@ async function writePost(platform) {
             })
         });
 
+        if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            previewData[platformKey] = err.error || 'Failed to generate';
+            if (activePlatform === platformKey) {
+                previewText.textContent = previewData[platformKey];
+            }
+            return;
+        }
+
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
 
@@ -99,28 +142,39 @@ async function writePost(platform) {
                     const data = line.slice(6);
                     if (data === '[DONE]') continue;
                     try {
-                        const { content } = JSON.parse(data);
-                        previewData[platformKey] += content;
-                        if (activePlatform === platformKey) {
-                            previewText.textContent = previewData[platformKey];
+                        const parsed = JSON.parse(data);
+                        if (parsed.type === 'retry') {
+                            showRetryCountdown(parsed.delay, platformKey);
+                        } else if (parsed.type === 'error') {
+                            clearRetryStatus();
+                            previewData[platformKey] = parsed.message;
+                            if (activePlatform === platformKey) {
+                                previewText.textContent = previewData[platformKey];
+                            }
+                        } else {
+                            if (!contentStarted.has(platformKey)) {
+                                contentStarted.add(platformKey);
+                                clearRetryStatus();
+                                previewData[platformKey] = '';
+                            }
+                            const content = parsed.content || '';
+                            previewData[platformKey] += content;
+                            if (activePlatform === platformKey) {
+                                previewText.textContent = previewData[platformKey];
+                            }
                         }
                     } catch (err) { }
                 }
             }
         }
 
-        btnText.textContent = '開始製作';
-
     } catch (error) {
         console.error(error);
-        btnText.textContent = '錯誤';
-        generateBtn.disabled = false;
-        generateBtn.classList.remove('loading');
-        previewData[platformKey] = 'Failed to generate :c';
+        clearRetryStatus();
+        previewData[platformKey] = '失敗 :c';
         if (activePlatform === platformKey) {
             previewText.textContent = previewData[platformKey];
         }
-        return;
     }
 }
 
@@ -133,7 +187,7 @@ form.addEventListener('submit', async (e) => {
     });
 
     if (selectedPlatforms.length === 0) {
-        alert('Please select at least one platform');
+        alert('請至少選擇一個平台');
         return;
     }
     generateBtn.disabled = true;
@@ -141,8 +195,16 @@ form.addEventListener('submit', async (e) => {
     previewText.textContent = '';
 
     generateBtn.classList.add('loading');
-    const platformPromises = selectedPlatforms.map(async platform => writePost(platform));
-    await Promise.allSettled(platformPromises);
+
+    for (let i = 0; i < selectedPlatforms.length; i++) {
+        const platform = selectedPlatforms[i];
+        const key = platform.toLowerCase();
+        previewData[key] = i === 0 ? '製作中...' : '正在等候其他平台...';
+    }
+
+    for (const platform of selectedPlatforms) {
+        await writePost(platform);
+    }
 
     generateBtn.disabled = false;
     generateBtn.classList.remove('loading');

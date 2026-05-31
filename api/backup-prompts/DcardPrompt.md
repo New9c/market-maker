@@ -56,4 +56,43 @@
 - 圖片建議：  
 - 備註：
 
+**參考用範例輸入：**
+
+dcardMode: "official_ad"  
+promotionTarget: "AI 實戰線下工作坊｜把宣傳文案流程做成可重複模板"  
+targetAudience: "25–35 歲上班族"  
+promotionStart: "2026-06-01"  
+promotionEnd: "2026-06-15"  
+eventDateTimeLocation: "2026-06-22 19:00–21:30，台北市大安區"  
+keySellingPoints:  
+  - "6/15 前早鳥 8 折"  
+  - "現場帶著你手上的活動素材直接改稿"  
+  - "附可重複使用的 Prompt 與文案模板"  
+eventFlow:  
+  - "19:00 報到"  
+  - "19:15 開場與案例拆解"  
+  - "19:30 AI 文案實作"  
+  - "21:00 Q&A"  
+registrationUrl: "https://example.com/workshop"  
+brandVoice: "專業但不艱深，像懂行的同事"  
+hasImageBrief: true  
+imageBrief:  
+  - "下班後工作坊現場，學員拿著筆電討論"  
+priceOffer: "原價 NT$3,600，早鳥 NT$2,880"  
+quotaDeadline: "限額 30 名，6/15 截止"  
+dcardTopics:  
+  - "AI工作"
+  - "上班族進修"
+isCommercialEvent: true  
+extraConstraints: "標題要穩，不要太像補習班"
+
+**參考用範例輸出：**
+
+若 dcardMode = official_ad  
+- 標題：下班後學AI宣傳術  
+- 內容：給上班族的實體工作坊，6/15 前早鳥 8 折，現場直接改你的活動素材。  
+- CTA：立即報名  
+- 圖片建議：用下班後進教室的現場照片，避免太像硬廣海報。  
+- 備註：若改用 organic_community 模式，請移除售票導流與明顯商業 CTA。
+
 設計理由與注意事項：Dcard 不適合用單一 Prompt 通殺，因為自然社群模式與官方廣告模式的容許寫法完全不同。官方規範已明示多數商業導流、售票連結、加 LINE、品牌推廣與抽獎互動都受限制；但官方廣告版位又有非常清楚的 18／50／5 欄位規格，因此在系統設計上必須把 dcardMode 做成必要欄位，不能省略。[\[17\]](https://www.dcard.tw/f/announcement/p/234243656)

@@ -8,6 +8,15 @@ const client = new Groq();
 
 export const dynamic = 'force-dynamic';
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function parseRetryDelay(message) {
+    const m = message.match(/try again in ([\d.]+)s/);
+    return m ? parseFloat(m[1]) : null;
+}
+
 function generatePrompt(data) {
     const { platform, ...querys } = data
     const template = fs.readFileSync(path.join(__dirname, `./prompts/${platform}Prompt.md`), 'utf8');
@@ -28,30 +37,53 @@ function generatePrompt(data) {
     });
 }
 
+async function createCompletion(prompt, onRetry) {
+    for (let attempt = 0; attempt <= 3; attempt++) {
+        try {
+            return await client.chat.completions.create({
+                model: 'openai/gpt-oss-120b',
+                messages: [{ role: 'user', content: prompt }],
+                temperature: 1,
+                max_completion_tokens: 3072,
+                top_p: 1,
+                stream: true,
+            });
+        } catch (error) {
+            const delay = parseRetryDelay(error.message);
+            if (delay !== null && attempt < 3) {
+                onRetry(delay);
+                await sleep((delay + 0.2) * 1000);
+                continue;
+            }
+            throw error;
+        }
+    }
+}
+
 export async function POST(request) {
     const data = await request.json();
     const thePrompt = generatePrompt(data);
 
-    const stream = await client.chat.completions.create({
-        model: 'openai/gpt-oss-120b',
-        messages: [{ role: 'user', content: thePrompt }],
-        temperature: 1,
-        max_completion_tokens: 1536,
-        top_p: 1,
-        stream: true,
-    });
-
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
         async start(controller) {
-            for await (const chunk of stream) {
-                const content = chunk.choices[0]?.delta?.content || '';
-                if (content) {
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
+            try {
+                const stream = await createCompletion(thePrompt, (delay) => {
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'retry', delay })}\n\n`));
+                });
+
+                for await (const chunk of stream) {
+                    const content = chunk.choices[0]?.delta?.content || '';
+                    if (content) {
+                        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'content', content })}\n\n`));
+                    }
                 }
+            } catch (error) {
+                controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'error', message: error.message })}\n\n`));
+            } finally {
+                controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+                controller.close();
             }
-            controller.enqueue(encoder.encode('data: [DONE]\n\n'));
-            controller.close();
         },
     });
 

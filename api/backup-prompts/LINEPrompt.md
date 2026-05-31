@@ -47,4 +47,45 @@
 - 建議附圖順序：  
 - 風險提醒：
 
+**參考用範例輸入：**
+
+promotionTarget: "AI 實戰線下工作坊｜把宣傳文案流程做成可重複模板"  
+targetAudience: "25–35 歲上班族"  
+promotionStart: "2026-06-01"  
+promotionEnd: "2026-06-15"  
+eventDateTimeLocation: "2026-06-22 19:00–21:30，台北市大安區"  
+keySellingPoints:  
+  - "6/15 前早鳥 8 折"  
+  - "現場帶著你手上的活動素材直接改稿"  
+  - "附可重複使用的 Prompt 與文案模板"  
+eventFlow:  
+  - "19:00 報到"  
+  - "19:15 開場與案例拆解"  
+  - "19:30 AI 文案實作"  
+  - "21:00 Q&A"  
+registrationUrl: "https://example.com/workshop"  
+brandVoice: "專業但不艱深，像懂行的同事"  
+hasImageBrief: true  
+imageBrief:  
+  - "下班後工作坊現場，學員拿著筆電討論"  
+  - "講義、筆電與便利貼的實作桌面"  
+priceOffer: "原價 NT$3,600，早鳥 NT$2,880"  
+quotaDeadline: "限額 30 名，6/15 截止"  
+lineGroupType: "work_group"  
+extraConstraints: "不要太打擾"
+
+**參考用範例輸出：**
+
+聊天室短訊息  
+- 版本A：提醒一下：6/15 前報名這場 AI 實體工作坊有早鳥 8 折。適合想把 AI 真的接進工作流程的上班族，會直接現場改你的活動素材。報名：https://example.com/workshop  
+- 版本B：這週最後早鳥🙌 如果你最近也在卡宣傳文案，這場 6/22 的台北實體工作坊可以看看，會直接做實作。詳情：https://example.com/workshop
+
+記事本延伸版  
+- 標題：AI 宣傳流程實體工作坊｜6/15 前早鳥優惠  
+- 內文：這場是給 25–35 歲上班族的下班實作課。6/22 19:00–21:30 在台北大安區舉行，重點不是講概念，而是直接帶著活動素材現場改稿。從鉤子、賣點、CTA 到可重複使用的 Prompt 模板，當天會完整走一輪。原價 NT$3,600，6/15 前早鳥 NT$2,880，限額 30 名。報名：https://example.com/workshop
+
+另外補充  
+- 建議附圖順序：先放工作坊現場感照片，再放講義與筆電桌面。  
+- 風險提醒：不要短時間重複貼相同訊息；群組內長文建議改記事本。
+
 設計理由與注意事項：LINE 群組的強項是高開啟率提醒，不是長文閱讀。官方明確表示聊天不支援原生排程發送，所以流程上應分成「短訊息提醒」與「記事本完整資訊」兩層。又因官方提醒釣魚與詐騙連結風險，文案與網址都要可辨識，不能像來路不明簡訊。[\[30\]](https://help.line.me/line/smartphone/sp?contentId=20007005&lang=en)
