@@ -65,16 +65,20 @@ function showRetryCountdown(delay, platformKey) {
     }
 
     const tick = () => {
-        remaining--;
         if (remaining <= 0) {
             clearInterval(retryTimer);
             retryTimer = null;
+            previewData[platformKey] = '製作中...';
+            if (activePlatform === platformKey) {
+                previewText.textContent = previewData[platformKey];
+            }
             return;
         }
         previewData[platformKey] = `等候中（剩${remaining}秒）...`;
         if (activePlatform === platformKey) {
             previewText.textContent = previewData[platformKey];
         }
+        remaining--;
     };
     retryTimer = setInterval(tick, 1000);
 }
