@@ -59,7 +59,7 @@ function showRetryCountdown(delay, platformKey) {
     let remaining = Math.ceil(delay);
 
     clearInterval(retryTimer);
-    previewData[platformKey] = `等候中（剩${remaining}秒）`;
+    previewData[platformKey] = `等候中（剩${remaining}秒）...`;
     if (activePlatform === platformKey) {
         previewText.textContent = previewData[platformKey];
     }
@@ -71,7 +71,7 @@ function showRetryCountdown(delay, platformKey) {
             retryTimer = null;
             return;
         }
-        previewData[platformKey] = `等候中（剩${remaining}秒）`;
+        previewData[platformKey] = `等候中（剩${remaining}秒）...`;
         if (activePlatform === platformKey) {
             previewText.textContent = previewData[platformKey];
         }

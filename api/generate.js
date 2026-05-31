@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import Groq from 'groq-sdk';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const client = new Groq();
+const client = new Groq({ maxRetries: 0 });
 
 export const dynamic = 'force-dynamic';
 
@@ -13,8 +13,11 @@ function sleep(ms) {
 }
 
 function parseRetryDelay(message) {
-    const m = message.match(/try again in ([\d.]+)s/);
-    return m ? parseFloat(m[1]) : null;
+    const sec = message.match(/try again in ([\d.]+)s/);
+    if (sec) return parseFloat(sec[1]);
+    const ms = message.match(/try again in ([\d.]+)ms/);
+    if (ms) return parseFloat(ms[1]) / 1000;
+    return null;
 }
 
 function generatePrompt(data) {
