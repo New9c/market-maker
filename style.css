@@ -11,8 +11,6 @@
     --text: #cdd6f4;
     --text-muted: #a6adc8;
     --radius: 1rem;
-    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 12px 40px -4px rgba(0, 0, 0, 0.2);
-    --shadow-hover: 0 8px 30px -2px rgba(203, 166, 247, 0.15), 0 20px 50px -4px rgba(203, 166, 247, 0.1);
 }
 
 * {
@@ -24,6 +22,7 @@ p {
 }
 
 #groq-key {
+    cursor: pointer;
     color: var(--primary-hover);
     font-size: 2.5rem;
     margin-right: 1rem;
@@ -34,6 +33,53 @@ p {
     color: var(--primary);
     font-size: 2.5rem;
     text-decoration: none;
+}
+
+#icon-container {
+    position: relative;
+}
+
+.key-popover {
+    display: none;
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    z-index: 10;
+}
+
+.key-popover.visible {
+    display: block;
+}
+
+#groqApiKey {
+    width: 240px;
+    font: inherit;
+    border-radius: 0.85rem;
+    border: 2px solid var(--border);
+    padding: 0.75rem 1rem;
+    background: #1e1e2e;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+#groqApiKey:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: none;
+}
+
+.popover-link {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--primary-hover);
+    text-decoration: none;
+    text-align: center;
 }
 
 @keyframes fadeIn {
@@ -103,7 +149,6 @@ body {
     letter-spacing: 0.05em;
     background: linear-gradient(135deg, #45475a 0%, #313244 100%);
     color: #cba6f7;
-    box-shadow: 0 2px 8px rgba(203, 166, 247, 0.15);
 }
 
 .lead {
@@ -158,7 +203,7 @@ select {
     border: 2px solid var(--border);
     padding: 0.75rem 1rem;
     background: #1e1e2e;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: border-color 0.2s ease, background 0.2s ease;
     font-size: 1rem;
     color: #cdd6f4;
 }
@@ -169,7 +214,7 @@ select:focus {
     outline: none;
     border-color: var(--primary);
     background: #181825;
-    box-shadow: 0 0 0 4px rgba(203, 166, 247, 0.1);
+    /*box-shadow: 0 0 0 4px rgba(203, 166, 247, 0.1);*/
 }
 
 input::placeholder,

@@ -21,7 +21,7 @@ function parseRetryDelay(message) {
 }
 
 function generatePrompt(data) {
-    const { platform, ...querys } = data
+    const { platform, groqApiKey, ...querys } = data
     const template = fs.readFileSync(path.join(__dirname, `./prompts/${platform}Prompt.md`), 'utf8');
 
     return template.replace(/{{\s*(\w+)\s*}}/g, (_, key) => {
@@ -40,7 +40,7 @@ function generatePrompt(data) {
     });
 }
 
-async function createCompletion(prompt, onRetry) {
+async function createCompletion(prompt, onRetry, client) {
     for (let attempt = 0; attempt <= 3; attempt++) {
         try {
             return await client.chat.completions.create({
@@ -65,7 +65,9 @@ async function createCompletion(prompt, onRetry) {
 
 export async function POST(request) {
     const data = await request.json();
+    const { groqApiKey } = data;
     const thePrompt = generatePrompt(data);
+    const groqClient = groqApiKey ? new Groq({ apiKey: groqApiKey, maxRetries: 0 }) : client;
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
@@ -73,7 +75,7 @@ export async function POST(request) {
             try {
                 const stream = await createCompletion(thePrompt, (delay) => {
                     controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'retry', delay })}\n\n`));
-                });
+                }, groqClient);
 
                 for await (const chunk of stream) {
                     const content = chunk.choices[0]?.delta?.content || '';
