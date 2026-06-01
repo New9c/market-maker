@@ -7,11 +7,40 @@ const platforms = [
     { id: 'email', label: 'Email' }
 ];
 
-const form = document.getElementById('generator-form');
-const generateBtn = document.getElementById('generate-btn');
-const previewText = document.getElementById('preview-text');
-const platformCheckboxes = document.getElementById('platform-checkboxes');
-const platformTabsContainer = document.getElementById('platform-tabs');
+const gid = id => document.getElementById(id);
+const val = id => gid(id).value;
+
+const form = gid('generator-form');
+const generateBtn = gid('generate-btn');
+const previewText = gid('preview-text');
+const platformCheckboxes = gid('platform-checkboxes');
+const platformTabsContainer = gid('platform-tabs');
+
+function getFormData(platform) {
+    return {
+        platform,
+        dcardMode: val('dcardMode'),
+        promotionTarget: val('promotionTarget'),
+        targetAudience: val('targetAudience'),
+        promotionStart: val('promotionStart'),
+        promotionEnd: val('promotionEnd'),
+        keySellingPoints: val('keySellingPoints'),
+        eventFlow: val('eventFlow'),
+        eventDateTimeLocation: val('eventDateTimeLocation'),
+        registrationUrl: val('registrationUrl'),
+        unsubscribeUrl: val('unsubscribeUrl'),
+        hasImageBrief: gid('imageBrief').value ? 'true' : 'false',
+        imageBrief: val('imageBrief') || 'None',
+        brandVoice: val('brandVoice'),
+        threadsTopicTag: val('threadsTopicTag'),
+        priceOffer: val('priceOffer'),
+        quotaDeadline: val('quotaDeadline'),
+        lineGroupType: val('lineGroupType'),
+        isCommercialEvent: val('isCommercialEvent'),
+        instagramPostType: val('instagramPostType'),
+        extraConstraints: val('extraConstraints'),
+    };
+}
 
 platforms.forEach((platform, index) => {
     const checkbox = document.createElement('label');
@@ -20,7 +49,7 @@ platforms.forEach((platform, index) => {
     checkbox.addEventListener('click', () => {
         platformTabs.forEach(t => t.classList.remove('active'));
         for (const t of platformTabs) {
-            if (document.getElementById(t.dataset.platform).checked) {
+            if (gid(t.dataset.platform).checked) {
                 t.classList.add('active');
                 activePlatform = t.dataset.platform;
                 previewText.textContent = previewData[activePlatform] || '';
@@ -95,29 +124,7 @@ async function writePost(platform) {
         const response = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                platform: platform,
-                dcardMode: document.getElementById('dcardMode').value,
-                promotionTarget: document.getElementById('promotionTarget').value,
-                targetAudience: document.getElementById('targetAudience').value,
-                promotionStart: document.getElementById('promotionStart').value,
-                promotionEnd: document.getElementById('promotionEnd').value,
-                keySellingPoints: document.getElementById('keySellingPoints').value,
-                eventFlow: document.getElementById('eventFlow').value,
-                eventDateTimeLocation: document.getElementById('eventDateTimeLocation').value,
-                registrationUrl: document.getElementById('registrationUrl').value,
-                unsubscribeUrl: document.getElementById('unsubscribeUrl').value,
-                hasImageBrief: document.getElementById('imageBrief').value ? 'true' : 'false',
-                imageBrief: document.getElementById('imageBrief').value || 'None',
-                brandVoice: document.getElementById('brandVoice').value,
-                threadsTopicTag: document.getElementById('threadsTopicTag').value,
-                priceOffer: document.getElementById('priceOffer').value,
-                quotaDeadline: document.getElementById('quotaDeadline').value,
-                lineGroupType: document.getElementById('lineGroupType').value,
-                isCommercialEvent: document.getElementById('isCommercialEvent').value,
-                instagramPostType: document.getElementById('instagramPostType').value,
-                extraConstraints: document.getElementById('extraConstraints').value
-            })
+            body: JSON.stringify(getFormData(platform))
         });
 
         if (!response.ok) {
@@ -176,7 +183,7 @@ form.addEventListener('submit', async (e) => {
 
     const selectedPlatforms = [];
     platforms.forEach(p => {
-        if (document.getElementById(p.id).checked) selectedPlatforms.push(p.label);
+        if (gid(p.id).checked) selectedPlatforms.push(p.label);
     });
 
     if (selectedPlatforms.length === 0) {
