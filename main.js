@@ -203,7 +203,10 @@ form.addEventListener('submit', async (e) => {
     for (let i = 0; i < selectedPlatforms.length; i++) {
         const platform = selectedPlatforms[i];
         const key = platform.toLowerCase();
-        previewData[key] = i === 0 ? '製作中...' : '正在等候其他平台...';
+        previewData[key] = i == 0 ? '製作中...' : '正在等候其他平台...';
+        if (activePlatform === key) {
+            previewText.textContent = previewData[key];
+        }
     }
 
     for (const platform of selectedPlatforms) {
