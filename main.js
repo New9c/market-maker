@@ -52,6 +52,13 @@ platformTabs.forEach(tab => {
     });
 });
 
+function setPreview(key, value) {
+    previewData[key] = value;
+    if (activePlatform === key) {
+        previewText.textContent = value;
+    }
+}
+
 let retryTimer = null;
 const contentStarted = new Set();
 
@@ -59,25 +66,16 @@ function showRetryCountdown(delay, platformKey) {
     let remaining = Math.ceil(delay);
 
     clearInterval(retryTimer);
-    previewData[platformKey] = `等候中（剩${remaining}秒）...`;
-    if (activePlatform === platformKey) {
-        previewText.textContent = previewData[platformKey];
-    }
+    setPreview(platformKey, `等候中（剩${remaining}秒）...`);
 
     const tick = () => {
         if (remaining <= 0) {
             clearInterval(retryTimer);
             retryTimer = null;
-            previewData[platformKey] = '製作中...';
-            if (activePlatform === platformKey) {
-                previewText.textContent = previewData[platformKey];
-            }
+            setPreview(platformKey, '製作中...');
             return;
         }
-        previewData[platformKey] = `等候中（剩${remaining}秒）...`;
-        if (activePlatform === platformKey) {
-            previewText.textContent = previewData[platformKey];
-        }
+        setPreview(platformKey, `等候中（剩${remaining}秒）...`);
         remaining--;
     };
     retryTimer = setInterval(tick, 1000);
@@ -124,10 +122,7 @@ async function writePost(platform) {
 
         if (!response.ok) {
             const err = await response.json().catch(() => ({}));
-            previewData[platformKey] = err.error || 'Failed to generate';
-            if (activePlatform === platformKey) {
-                previewText.textContent = previewData[platformKey];
-            }
+            setPreview(platformKey, err.error || 'Failed to generate');
             return;
         }
 
@@ -151,10 +146,7 @@ async function writePost(platform) {
                             showRetryCountdown(parsed.delay, platformKey);
                         } else if (parsed.type === 'error') {
                             clearRetryStatus();
-                            previewData[platformKey] = parsed.message;
-                            if (activePlatform === platformKey) {
-                                previewText.textContent = previewData[platformKey];
-                            }
+                            setPreview(platformKey, parsed.message);
                         } else {
                             if (!contentStarted.has(platformKey)) {
                                 contentStarted.add(platformKey);
@@ -175,10 +167,7 @@ async function writePost(platform) {
     } catch (error) {
         console.error(error);
         clearRetryStatus();
-        previewData[platformKey] = '失敗 :c';
-        if (activePlatform === platformKey) {
-            previewText.textContent = previewData[platformKey];
-        }
+        setPreview(platformKey, '失敗 :c');
     }
 }
 
@@ -203,10 +192,7 @@ form.addEventListener('submit', async (e) => {
     for (let i = 0; i < selectedPlatforms.length; i++) {
         const platform = selectedPlatforms[i];
         const key = platform.toLowerCase();
-        previewData[key] = i == 0 ? '製作中...' : '正在等候其他平台...';
-        if (activePlatform === key) {
-            previewText.textContent = previewData[key];
-        }
+        setPreview(key, i == 0 ? '製作中...' : '正在等候其他平台...');
     }
 
     for (const platform of selectedPlatforms) {
