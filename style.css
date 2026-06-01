@@ -53,7 +53,8 @@ p {
 }
 
 .key-popover.visible {
-    display: block;
+    display: grid;
+    grid-template-rows: 1fr 1.5fr;
 }
 
 #groqApiKey {
@@ -74,7 +75,9 @@ p {
 }
 
 .popover-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 0.4rem;
     font-size: 0.9rem;
     color: var(--primary-hover);
@@ -300,17 +303,23 @@ button {
     overflow: hidden;
 }
 
-#generate-btn:hover:not(:disabled) {
-    transform: translateY(-6px);
-}
-
-#generate-btn:active:not(:disabled) {
-    transform: translateY(0);
-}
-
 #generate-btn:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+.hover-lift {
+    display: inline-flex;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.hover-lift:hover:not(:disabled) {
+    transform: translateY(-6px);
+}
+
+.hover-lift:active:not(:disabled) {
+    transform: translateY(0);
 }
 
 .btn-loader {
