@@ -17,10 +17,10 @@ const platformCheckboxes = gid('platform-checkboxes');
 const platformTabsContainer = gid('platform-tabs');
 const keyPopover = gid('key-popover');
 const keyIcon = gid('groq-key');
-const apiKeyInput = gid('groqApiKey');
+const apiKeyInput = gid('groq-api-key');
 
-apiKeyInput.value = localStorage.getItem('groqApiKey') ?? '';
-apiKeyInput.addEventListener('input', () => localStorage.setItem('groqApiKey', apiKeyInput.value));
+apiKeyInput.value = localStorage.getItem('groq-api-key') ?? '';
+apiKeyInput.addEventListener('input', () => localStorage.setItem('groq-api-key', apiKeyInput.value));
 
 keyIcon.addEventListener('click', e => {
     e.stopPropagation();
@@ -35,7 +35,7 @@ function getFormData(platform) {
     const key = apiKeyInput.value.trim();
     return {
         platform,
-        ...(key && { groqApiKey: key }),
+        ...(key && { 'groq-api-key': key }),
         dcardMode: val('dcardMode'),
         promotionTarget: val('promotionTarget'),
         targetAudience: val('targetAudience'),

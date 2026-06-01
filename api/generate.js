@@ -21,7 +21,7 @@ function parseRetryDelay(message) {
 }
 
 function generatePrompt(data) {
-    const { platform, groqApiKey, ...querys } = data
+    const { platform, 'groq-api-key': groqApiKey, ...querys } = data
     const template = fs.readFileSync(path.join(__dirname, `./prompts/${platform}Prompt.md`), 'utf8');
 
     return template.replace(/{{\s*(\w+)\s*}}/g, (_, key) => {
@@ -65,7 +65,7 @@ async function createCompletion(prompt, onRetry, client) {
 
 export async function POST(request) {
     const data = await request.json();
-    const { groqApiKey } = data;
+    const groqApiKey = data['groq-api-key'];
     const thePrompt = generatePrompt(data);
     const groqClient = groqApiKey ? new Groq({ apiKey: groqApiKey, maxRetries: 0 }) : client;
 
