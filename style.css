@@ -246,34 +246,41 @@ select option {
 
 .input-actions {
     margin-top: 1.5rem;
-    display: flex;
-    gap: 2rem;
 }
 
 #platform-checkboxes {
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .inline {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 2px solid var(--border);
     font-weight: 500;
     cursor: pointer;
     user-select: none;
+    transition: all 0.15s ease;
+}
+
+.inline:has(input:checked) {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #000;
+    font-weight: 700;
+}
+
+.inline:hover {
+    border-color: var(--primary);
 }
 
 .inline input[type="checkbox"] {
-    width: 1.25rem;
-    height: 1.25rem;
-    accent-color: var(--primary);
-    cursor: pointer;
-    transition: transform 0.15s ease;
-}
-
-.inline:hover input[type="checkbox"] {
-    transform: scale(1.1);
+    display: none;
 }
 
 .submit-row {
