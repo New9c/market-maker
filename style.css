@@ -29,9 +29,9 @@ p {
 fieldset {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 1rem 2rem;
-    border: var(--secondary) 3px solid;
+    border: var(--primary) 3px solid;
     border-radius: var(--radius);
 }
 
@@ -39,8 +39,14 @@ legend {
     font-size: 1.2rem;
     font-weight: 600;
     font-style: italic;
-    color: var(--text);
+    color: var(--primary);
     padding: 0.5rem 1rem;
+}
+
+
+fieldset>.input-actions {
+    grid-column: 1 / -1;
+    margin-top: 0;
 }
 
 #groq-key {
@@ -124,14 +130,14 @@ body {
     color: var(--text);
     min-height: 100vh;
     padding: 1rem 2rem;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
 }
 
-.left-panel {
+.main-panel {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .app-header {
@@ -192,15 +198,50 @@ body {
 }
 
 .input-panel {
-    padding-right: 2rem;
     animation: slideIn 0.6s ease-out 0.2s both;
 }
 
 .preview-panel {
-    padding-left: 2rem;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    translate: -50%;
+    width: min(900px, 100vw);
+    height: 100vh;
+    background: var(--bg-alt);
     border-left: 2px solid var(--border);
-    animation: slideIn 0.6s ease-out 0.3s both;
+    border-right: 2px solid var(--border);
+    padding: 1.5rem;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
 }
+
+.preview-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.preview-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
 
 label {
     display: flex;
@@ -210,6 +251,10 @@ label {
     font-weight: 500;
     color: var(--text);
     margin-bottom: 1.25rem;
+}
+
+label:has([required]) {
+    font-weight: 700;
 }
 
 input,

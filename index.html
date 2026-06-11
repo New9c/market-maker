@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <div class="left-panel">
+    <div class="main-panel">
         <header class="app-header">
             <h1>宣傳幫手</h1>
             <div id="icon-container">
@@ -95,16 +95,34 @@
                     <input type="text" id="registrationUrl" required />
                 </label>
                 <label>
-                    圖片說明：(非必須)
+                    圖片說明：
                     <input type="text" id="imageBrief" />
-                </label>
-                <label class="email">
-                    退訂連結：
-                    <input type="text" id="unsubscribeUrl" />
                 </label>
             </fieldset>
             <fieldset>
                 <legend>平台設定</legend>
+                <div class="input-actions" id="platform-checkboxes"></div>
+                <label class="threads">
+                    Threads標籤：
+                    <input type="text" id="threadsTopicTag" />
+                </label>
+                <label class="instagram">
+                    發文類型：
+                    <select id="instagramPostType">
+                        <option value="feed_caption">動態貼文</option>
+                        <option value="reels_caption">Reels貼文</option>
+                        <option value="carousel">輪播貼文</option>
+                    </select>
+                </label>
+                <label class="line">
+                    群組屬性：
+                    <select id="lineGroupType">
+                        <option value="close_friends">朋友群</option>
+                        <option value="alumni">校友群</option>
+                        <option value="work_group">工作群</option>
+                        <option value="community">LINE社群</option>
+                    </select>
+                </label>
                 <label class="dcard">
                     Dcard發文類型：
                     <select id="dcardMode">
@@ -119,29 +137,11 @@
                         <option value="false">否</option>
                     </select>
                 </label>
-                <label class="threads">
-                    Threads標籤：
-                    <input type="text" id="threadsTopicTag" />
-                </label>
-                <label class="line">
-                    群組屬性：
-                    <select id="lineGroupType">
-                        <option value="close_friends">朋友群</option>
-                        <option value="alumni">校友群</option>
-                        <option value="work_group">工作群</option>
-                        <option value="community">LINE社群</option>
-                    </select>
-                </label>
-                <label class="instagram">
-                    發文類型：
-                    <select id="instagramPostType">
-                        <option value="feed_caption">動態貼文</option>
-                        <option value="reels_caption">Reels貼文</option>
-                        <option value="carousel">輪播貼文</option>
-                    </select>
+                <label class="email">
+                    退訂連結：
+                    <input type="text" id="unsubscribeUrl" />
                 </label>
             </fieldset>
-            <div class="input-actions" id="platform-checkboxes"></div>
             <div class="submit-row">
                 <button class="primary hover-lift" type="submit" id="generate-btn">
                     <span class="btn-text">開始製作</span>
@@ -151,7 +151,8 @@
         </form>
     </div>
 
-    <section class="preview-panel">
+    <div id="preview-overlay" class="preview-overlay"></div>
+    <section class="preview-panel" id="preview-panel">
         <nav class="platform-tabs" id="platform-tabs"></nav>
         <div id="preview-container">
             <p class="preview-text" id="preview-text">

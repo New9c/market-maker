@@ -18,9 +18,26 @@ const platformTabsContainer = gid('platform-tabs');
 const keyPopover = gid('key-popover');
 const keyIcon = gid('groq-key');
 const apiKeyInput = gid('groq-api-key');
+const previewPanel = gid('preview-panel');
+const previewOverlay = gid('preview-overlay');
 
 apiKeyInput.value = localStorage.getItem('groq-api-key') ?? '';
 apiKeyInput.addEventListener('input', () => localStorage.setItem('groq-api-key', apiKeyInput.value));
+
+function openPreview() {
+    previewPanel.classList.add('open');
+    previewOverlay.classList.add('open');
+}
+
+function closePreview() {
+    previewPanel.classList.remove('open');
+    previewOverlay.classList.remove('open');
+}
+
+previewOverlay.addEventListener('click', closePreview);
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePreview();
+});
 
 keyIcon.addEventListener('click', e => {
     e.stopPropagation();
@@ -210,6 +227,7 @@ form.addEventListener('submit', async (e) => {
     generateBtn.disabled = true;
     platforms.forEach(p => previewData[p.id] = '');
     previewText.textContent = '';
+    openPreview();
 
     generateBtn.classList.add('loading');
 
