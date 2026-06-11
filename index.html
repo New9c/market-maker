@@ -38,7 +38,8 @@
         </header>
 
         <form class="input-panel" id="generator-form">
-            <div class="form-grid">
+            <fieldset>
+                <legend>活動基本資訊</legend>
                 <label>
                     宣傳標的：
                     <input type="text" id="promotionTarget" required />
@@ -55,17 +56,13 @@
                     宣傳結束：
                     <input type="text" id="promotionEnd" required />
                 </label>
-                <label class="dcard">
-                    Dcard發文類型：
-                    <select id="dcardMode">
-                        <option value="organic_community">一般貼文</option>
-                        <option value="official_ad">廣告</option>
-                    </select>
-                </label>
                 <label>
                     活動日期與地點：
                     <input type="text" id="eventDateTimeLocation" required />
                 </label>
+            </fieldset>
+            <fieldset>
+                <legend>宣傳內容</legend>
                 <label>
                     主要賣點：
                     <input type="text" id="keySellingPoints" required />
@@ -75,25 +72,16 @@
                     <input type="text" id="eventFlow" required />
                 </label>
                 <label>
-                    圖片說明：(非必須)
-                    <input type="text" id="imageBrief" />
-                </label>
-                <label>
-                    報名/購買連結：
-                    <input type="text" id="registrationUrl" required />
-                </label>
-                <label class="email">
-                    退訂連結：
-                    <input type="text" id="unsubscribeUrl" />
-                </label>
-                <label>
                     品牌語調：
                     <input type="text" id="brandVoice" required />
                 </label>
-                <label class="threads">
-                    Threads標籤：
-                    <input type="text" id="threadsTopicTag" />
+                <label>
+                    其他限制：
+                    <input type="text" id="extraConstraints" />
                 </label>
+            </fieldset>
+            <fieldset>
+                <legend>優惠與連結</legend>
                 <label>
                     價格/優惠：
                     <input type="text" id="priceOffer" required />
@@ -101,6 +89,39 @@
                 <label>
                     名額/截止資訊：
                     <input type="text" id="quotaDeadline" required />
+                </label>
+                <label>
+                    報名/購買連結：
+                    <input type="text" id="registrationUrl" required />
+                </label>
+                <label>
+                    圖片說明：(非必須)
+                    <input type="text" id="imageBrief" />
+                </label>
+                <label class="email">
+                    退訂連結：
+                    <input type="text" id="unsubscribeUrl" />
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>平台設定</legend>
+                <label class="dcard">
+                    Dcard發文類型：
+                    <select id="dcardMode">
+                        <option value="organic_community">一般貼文</option>
+                        <option value="official_ad">廣告</option>
+                    </select>
+                </label>
+                <label class="dcard">
+                    是否屬商業／售票活動：
+                    <select id="isCommercialEvent">
+                        <option value="true">是</option>
+                        <option value="false">否</option>
+                    </select>
+                </label>
+                <label class="threads">
+                    Threads標籤：
+                    <input type="text" id="threadsTopicTag" />
                 </label>
                 <label class="line">
                     群組屬性：
@@ -111,13 +132,6 @@
                         <option value="community">LINE社群</option>
                     </select>
                 </label>
-                <label class="dcard">
-                    是否屬商業／售票活動：
-                    <select id="isCommercialEvent">
-                        <option value="true">是</option>
-                        <option value="false">否</option>
-                    </select>
-                </label>
                 <label class="instagram">
                     發文類型：
                     <select id="instagramPostType">
@@ -126,12 +140,8 @@
                         <option value="carousel">輪播貼文</option>
                     </select>
                 </label>
-                <label>
-                    其他限制：
-                    <input type="text" id="extraConstraints" />
-                </label>
-                <div class="input-actions" id="platform-checkboxes"></div>
-            </div>
+            </fieldset>
+            <div class="input-actions" id="platform-checkboxes"></div>
             <div class="submit-row">
                 <button class="primary hover-lift" type="submit" id="generate-btn">
                     <span class="btn-text">開始製作</span>

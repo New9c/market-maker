@@ -26,6 +26,23 @@ p {
     white-space: pre-wrap;
 }
 
+fieldset {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    border: var(--secondary) 3px solid;
+    border-radius: var(--radius);
+}
+
+legend {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text);
+    padding: 0.5rem 1rem;
+}
+
 #groq-key {
     cursor: pointer;
     color: var(--accent);
@@ -108,7 +125,7 @@ body {
     min-height: 100vh;
     padding: 1rem 2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
 }
 
 .left-panel {
@@ -177,16 +194,6 @@ body {
 .input-panel {
     padding-right: 2rem;
     animation: slideIn 0.6s ease-out 0.2s both;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-}
-
-.form-grid .input-actions {
-    grid-column: 1 / -1;
 }
 
 .preview-panel {
