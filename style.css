@@ -141,7 +141,6 @@ body {
 }
 
 .app-header {
-    padding-right: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -310,7 +309,7 @@ select option {
 #platform-checkboxes {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .inline {
@@ -361,6 +360,7 @@ button {
 }
 
 #generate-btn {
+    font-size: 20px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
     color: var(--bg);
     position: relative;

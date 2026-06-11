@@ -42,61 +42,61 @@
                 <legend>活動基本資訊</legend>
                 <label>
                     宣傳標的：
-                    <input type="text" id="promotionTarget" required />
+                    <input type="text" id="promotionTarget" placeholder="e.g. AI 實戰線下工作坊" required />
                 </label>
                 <label>
                     目標對象：
-                    <input type="text" id="targetAudience" required />
+                    <input type="text" id="targetAudience" placeholder="e.g. 25–35 歲上班族" required />
                 </label>
                 <label>
                     宣傳開始：
-                    <input type="text" id="promotionStart" required />
+                    <input type="text" id="promotionStart" placeholder="e.g. 2026-06-01" required />
                 </label>
                 <label>
                     宣傳結束：
-                    <input type="text" id="promotionEnd" required />
+                    <input type="text" id="promotionEnd" placeholder="e.g. 2026-06-15" required />
                 </label>
                 <label>
                     活動日期與地點：
-                    <input type="text" id="eventDateTimeLocation" required />
+                    <input type="text" id="eventDateTimeLocation" placeholder="e.g. 2026-06-22 19:00–21:30，台北市大安區" required />
                 </label>
             </fieldset>
             <fieldset>
                 <legend>宣傳內容</legend>
                 <label>
                     主要賣點：
-                    <input type="text" id="keySellingPoints" required />
+                    <input type="text" id="keySellingPoints" placeholder="e.g. 早鳥 8 折、現場實作、附模板" required />
                 </label>
                 <label>
                     活動流程/時間：
-                    <input type="text" id="eventFlow" required />
+                    <input type="text" id="eventFlow" placeholder="e.g. 19:00 報到、19:30 實作、21:00 Q&A" required />
                 </label>
                 <label>
                     品牌語調：
-                    <input type="text" id="brandVoice" required />
+                    <input type="text" id="brandVoice" placeholder="e.g. 專業但不艱深，像懂行的同事" required />
                 </label>
                 <label>
                     其他限制：
-                    <input type="text" id="extraConstraints" />
+                    <input type="text" id="extraConstraints" placeholder="e.g. 避免過度浮誇" />
                 </label>
             </fieldset>
             <fieldset>
                 <legend>優惠與連結</legend>
                 <label>
                     價格/優惠：
-                    <input type="text" id="priceOffer" required />
+                    <input type="text" id="priceOffer" placeholder="e.g. 原價 NT$3,600，早鳥 NT$2,880" required />
                 </label>
                 <label>
                     名額/截止資訊：
-                    <input type="text" id="quotaDeadline" required />
+                    <input type="text" id="quotaDeadline" placeholder="e.g. 限額 30 名，6/15 截止" required />
                 </label>
                 <label>
                     報名/購買連結：
-                    <input type="text" id="registrationUrl" required />
+                    <input type="text" id="registrationUrl" placeholder="e.g. https://example.com/workshop" required />
                 </label>
                 <label>
                     圖片說明：
-                    <input type="text" id="imageBrief" />
+                    <input type="text" id="imageBrief" placeholder="e.g. 學員拿著筆電討論" />
                 </label>
             </fieldset>
             <fieldset>
@@ -104,11 +104,11 @@
                 <div class="input-actions" id="platform-checkboxes"></div>
                 <label class="threads">
                     Threads標籤：
-                    <input type="text" id="threadsTopicTag" />
+                    <input type="text" id="threadsTopicTag" placeholder="e.g. AI工作流程" required />
                 </label>
                 <label class="instagram">
                     發文類型：
-                    <select id="instagramPostType">
+                    <select id="instagramPostType" required>
                         <option value="feed_caption">動態貼文</option>
                         <option value="reels_caption">Reels貼文</option>
                         <option value="carousel">輪播貼文</option>
@@ -116,7 +116,7 @@
                 </label>
                 <label class="line">
                     群組屬性：
-                    <select id="lineGroupType">
+                    <select id="lineGroupType" required>
                         <option value="close_friends">朋友群</option>
                         <option value="alumni">校友群</option>
                         <option value="work_group">工作群</option>
@@ -125,21 +125,21 @@
                 </label>
                 <label class="dcard">
                     Dcard發文類型：
-                    <select id="dcardMode">
+                    <select id="dcardMode" required>
                         <option value="organic_community">一般貼文</option>
                         <option value="official_ad">廣告</option>
                     </select>
                 </label>
                 <label class="dcard">
                     是否屬商業／售票活動：
-                    <select id="isCommercialEvent">
+                    <select id="isCommercialEvent" required>
                         <option value="true">是</option>
                         <option value="false">否</option>
                     </select>
                 </label>
                 <label class="email">
                     退訂連結：
-                    <input type="text" id="unsubscribeUrl" />
+                    <input type="text" id="unsubscribeUrl" placeholder="e.g. https://example.com/unsubscribe" required />
                 </label>
             </fieldset>
             <div class="submit-row">
