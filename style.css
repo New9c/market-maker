@@ -1,15 +1,20 @@
 :root {
     font-family: "Plus Jakarta Sans", 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-    background-color: #1e1e2e;
-    color: #cdd6f4;
     line-height: 1.6;
     --primary: #cba6f7;
-    --primary-hover: #b4befe;
-    --surface: #313244;
+    --secondary: #89b4fa;
+    --accent: #b4befe;
     --bg: #1e1e2e;
+    --bg-alt: #181825;
+    --surface: #313244;
     --border: #45475a;
     --text: #cdd6f4;
     --text-muted: #a6adc8;
+    --text-placeholder: #6c7086;
+    --text-on-primary: #000;
+    --success: #a6e3a1;
+    --warning: #fab387;
+    --error: #f38ba8;
     --radius: 1rem;
 }
 
@@ -23,14 +28,14 @@ p {
 
 #groq-key {
     cursor: pointer;
-    color: var(--primary-hover);
+    color: var(--accent);
     font-size: 2.5rem;
     margin-right: 1rem;
 }
 
 #github-link,
 #github-link:visited {
-    color: var(--primary);
+    color: var(--accent);
     font-size: 2.5rem;
     text-decoration: none;
 }
@@ -57,19 +62,19 @@ p {
     grid-template-rows: 1fr 1.5fr;
 }
 
-#groqApiKey {
+#groq-api-key {
     width: 240px;
     font: inherit;
     border-radius: 0.85rem;
     border: 2px solid var(--border);
     padding: 0.75rem 1rem;
-    background: #1e1e2e;
+    background: var(--bg);
     font-size: 1rem;
     color: var(--text);
 }
 
-#groqApiKey:focus {
-    border-color: var(--primary);
+#groq-api-key:focus {
+    border-color: var(--accent);
     outline: none;
     box-shadow: none;
 }
@@ -80,7 +85,7 @@ p {
     justify-content: center;
     margin-top: 0.4rem;
     font-size: 0.9rem;
-    color: var(--primary-hover);
+    color: var(--accent);
     text-decoration: none;
     text-align: center;
 }
@@ -98,6 +103,8 @@ p {
 }
 
 body {
+    background-color: var(--bg);
+    color: var(--text);
     min-height: 100vh;
     padding: 1rem 2rem;
     display: grid;
@@ -135,7 +142,7 @@ body {
     margin: 0.75rem 0;
     font-size: clamp(2.2rem, 5vw, 3rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #cba6f7 0%, #89b4fa 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -150,8 +157,8 @@ body {
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    background: linear-gradient(135deg, #45475a 0%, #313244 100%);
-    color: #cba6f7;
+    background: linear-gradient(135deg, var(--border) 0%, var(--surface) 100%);
+    color: var(--accent);
 }
 
 .lead {
@@ -205,24 +212,24 @@ select {
     border-radius: 0.85rem;
     border: 2px solid var(--border);
     padding: 0.75rem 1rem;
-    background: #1e1e2e;
+    background: var(--bg);
     transition: border-color 0.2s ease, background 0.2s ease;
     font-size: 1rem;
-    color: #cdd6f4;
+    color: var(--text);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    border-color: var(--primary);
-    background: #181825;
+    border-color: var(--accent);
+    background: var(--bg-alt);
     /*box-shadow: 0 0 0 4px rgba(203, 166, 247, 0.1);*/
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: #6c7086;
+    color: var(--text-placeholder);
 }
 
 textarea {
@@ -240,8 +247,8 @@ select {
 }
 
 select option {
-    background: #1e1e2e;
-    color: #cdd6f4;
+    background: var(--bg);
+    color: var(--text);
 }
 
 .input-actions {
@@ -271,12 +278,12 @@ select option {
 .inline:has(input:checked) {
     border-color: var(--primary);
     background: var(--primary);
-    color: #000;
+    color: var(--text-on-primary);
     font-weight: 700;
 }
 
 .inline:hover {
-    border-color: var(--primary);
+    border-color: var(--accent);
 }
 
 .inline input[type="checkbox"] {
@@ -302,8 +309,8 @@ button {
 }
 
 #generate-btn {
-    background: linear-gradient(135deg, var(--primary) 0%, #89b4fa 100%);
-    color: #1e1e2e;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: var(--bg);
     position: relative;
     display: grid;
     place-items: center;
@@ -333,8 +340,8 @@ button {
     display: none;
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(30, 30, 46, 0.3);
-    border-top-color: #1e1e2e;
+    border: 2px solid color-mix(in srgb, var(--bg) 30%, transparent);
+    border-top-color: var(--bg);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
@@ -395,12 +402,12 @@ button {
 }
 
 .platform-tab:hover {
-    color: var(--primary);
+    color: var(--accent);
 }
 
 .platform-tab.active {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
+    color: var(--accent);
+    border-bottom-color: var(--accent);
 }
 
 .platform {
@@ -408,7 +415,7 @@ button {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.15em;
-    color: var(--primary);
+    color: var(--accent);
     text-transform: uppercase;
 }
 
