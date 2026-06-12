@@ -21,16 +21,16 @@ function parseRetryDelay(message) {
 }
 
 function generatePrompt(data) {
-    const { platform, 'groq-api-key': groqApiKey, ...querys } = data
+    const { platform, 'groq-api-key': groqApiKey, ...queries } = data
     const template = fs.readFileSync(path.join(__dirname, `./prompts/${platform}Prompt.md`), 'utf8');
 
     return template.replace(/{{\s*(\w+)\s*}}/g, (_, key) => {
-        if (!(key in querys)) {
+        if (!(key in queries)) {
             console.warn(`Warning: Template requires "${key}" but it was not provided.`);
             return `[MISSING: ${key}]`;
         }
 
-        const value = querys[key];
+        const value = queries[key];
 
         if (Array.isArray(value)) {
             return value.map(item => `\n- ${item}`).join('');
@@ -64,6 +64,10 @@ async function createCompletion(prompt, onRetry, client) {
 }
 
 export async function POST(request) {
+    const contentType = request.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+        return new Response('Expected application/json', { status: 415 });
+    }
     const data = await request.json();
     const groqApiKey = data['groq-api-key'];
     const thePrompt = generatePrompt(data);

@@ -269,6 +269,10 @@ select {
     color: var(--text);
 }
 
+input:user-invalid {
+    border-color: var(--error);
+}
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -501,17 +505,12 @@ button {
     }
 }
 
-.facebook,
 .threads,
 .instagram,
 .line,
 .dcard,
 .email {
     display: none;
-}
-
-:has(#facebook:checked) .facebook {
-    display: flex;
 }
 
 :has(#threads:checked) .threads {

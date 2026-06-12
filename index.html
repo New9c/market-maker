@@ -50,11 +50,11 @@
                 </label>
                 <label>
                     宣傳開始：
-                    <input type="text" id="promotionStart" placeholder="e.g. 2026-06-01" required />
+                    <input type="date" id="promotionStart" required />
                 </label>
                 <label>
                     宣傳結束：
-                    <input type="text" id="promotionEnd" placeholder="e.g. 2026-06-15" required />
+                    <input type="date" id="promotionEnd" required />
                 </label>
                 <label>
                     活動日期與地點：
@@ -93,7 +93,7 @@
                 </label>
                 <label>
                     報名/購買連結：
-                    <input type="text" id="registrationUrl" placeholder="e.g. https://example.com/workshop" required />
+                    <input type="url" id="registrationUrl" placeholder="https://example.com/workshop" required />
                 </label>
                 <label>
                     圖片說明：
@@ -138,9 +138,13 @@
                         <option value="false">否</option>
                     </select>
                 </label>
+                <label class="dcard">
+                    Dcard話題：
+                    <input type="text" id="dcardTopics" placeholder="上班族, AI, 進修" />
+                </label>
                 <label class="email">
                     退訂連結：
-                    <input type="text" id="unsubscribeUrl" placeholder="e.g. https://example.com/unsubscribe" />
+                    <input type="url" id="unsubscribeUrl" placeholder="https://example.com/unsubscribe" />
                 </label>
             </fieldset>
             <div class="submit-row">

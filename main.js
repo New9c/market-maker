@@ -17,6 +17,33 @@ const previewOverlay = gid('preview-overlay');
 apiKeyInput.value = localStorage.getItem('groq-api-key') ?? '';
 apiKeyInput.addEventListener('input', () => localStorage.setItem('groq-api-key', apiKeyInput.value));
 
+const FORM_STORAGE_KEY = 'generator-form';
+
+function saveFormData() {
+    const data = {};
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+        if (!el.id) return;
+        data[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+    });
+    sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(data));
+}
+
+function restoreFormData() {
+    const raw = sessionStorage.getItem(FORM_STORAGE_KEY);
+    if (!raw) return;
+    try {
+        const data = JSON.parse(raw);
+        Object.entries(data).forEach(([id, value]) => {
+            const el = gid(id);
+            if (!el) return;
+            if (el.type === 'checkbox') el.checked = value;
+            else el.value = value;
+        });
+    } catch (e) {}
+}
+
+form.addEventListener('change', saveFormData);
+
 function openPreview() {
     previewPanel.classList.add('open');
     previewOverlay.classList.add('open');
@@ -64,6 +91,7 @@ function getFormData(platform) {
         quotaDeadline: val('quotaDeadline'),
         lineGroupType: val('lineGroupType'),
         isCommercialEvent: val('isCommercialEvent'),
+        dcardTopics: val('dcardTopics'),
         instagramPostType: val('instagramPostType'),
         extraConstraints: val('extraConstraints'),
     };
@@ -92,6 +120,8 @@ platforms.forEach((platform, index) => {
     tab.textContent = platform.label;
     platformTabsContainer.appendChild(tab);
 });
+
+restoreFormData();
 
 const platformTabs = document.querySelectorAll('.platform-tab');
 
@@ -193,7 +223,7 @@ async function writePost(platform) {
                                 previewText.textContent = previewData[platformKey];
                             }
                         }
-                    } catch (err) { }
+                    } catch (err) { console.error('SSE parse error:', err); }
                 }
             }
         }
@@ -201,7 +231,7 @@ async function writePost(platform) {
     } catch (error) {
         console.error(error);
         clearRetryStatus();
-        setPreview(platformKey, '失敗 :c');
+        setPreview(platformKey, `發送失敗: ${error.message}`);
     }
 }
 
