@@ -105,11 +105,11 @@
                 <div class="input-actions" id="platform-checkboxes"></div>
                 <label class="threads">
                     Threads標籤：
-                    <input type="text" id="threadsTopicTag" placeholder="e.g. AI工作流程" required />
+                    <input type="text" id="threadsTopicTag" placeholder="e.g. AI工作流程" />
                 </label>
                 <label class="instagram">
                     發文類型：
-                    <select id="instagramPostType" required>
+                    <select id="instagramPostType">
                         <option value="feed_caption">動態貼文</option>
                         <option value="reels_caption">Reels貼文</option>
                         <option value="carousel">輪播貼文</option>
@@ -117,7 +117,7 @@
                 </label>
                 <label class="line">
                     群組屬性：
-                    <select id="lineGroupType" required>
+                    <select id="lineGroupType">
                         <option value="close_friends">朋友群</option>
                         <option value="alumni">校友群</option>
                         <option value="work_group">工作群</option>
@@ -126,22 +126,21 @@
                 </label>
                 <label class="dcard">
                     Dcard發文類型：
-                    <select id="dcardMode" required>
+                    <select id="dcardMode">
                         <option value="organic_community">一般貼文</option>
                         <option value="official_ad">廣告</option>
                     </select>
                 </label>
                 <label class="dcard">
                     是否屬商業／售票活動：
-                    <select id="isCommercialEvent" required>
+                    <select id="isCommercialEvent">
                         <option value="true">是</option>
                         <option value="false">否</option>
                     </select>
                 </label>
                 <label class="email">
                     退訂連結：
-                    <input type="text" id="unsubscribeUrl" placeholder="e.g. https://example.com/unsubscribe"
-                        required />
+                    <input type="text" id="unsubscribeUrl" placeholder="e.g. https://example.com/unsubscribe" />
                 </label>
             </fieldset>
             <div class="submit-row">
@@ -162,6 +161,7 @@
         </div>
     </section>
 
+    <script src="registry.js"></script>
     <script src="main.js"> </script>
 </body>
 

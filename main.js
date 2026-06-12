@@ -1,11 +1,4 @@
-const platforms = [
-    { id: 'facebook', label: 'Facebook' },
-    { id: 'threads', label: 'Threads' },
-    { id: 'instagram', label: 'Instagram' },
-    { id: 'line', label: 'LINE' },
-    { id: 'dcard', label: 'Dcard' },
-    { id: 'email', label: 'Email' }
-];
+const platforms = PLATFORM_REGISTRY;
 
 const gid = id => document.getElementById(id);
 const val = id => gid(id).value;
