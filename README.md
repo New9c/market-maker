@@ -12,7 +12,6 @@ To save time and effort for smaller businesses or individuals.
 
 ## Features
 - Generate marketing copy for 6 platforms at once: Facebook, Threads, Instagram, LINE, Dcard, Email
-- Parallel streaming generation with per-platform progress
 - Per-platform prompt templates with platform-specific rules
 - Rate-limit aware retry handling
 - Date pickers, URL validation, session persistence
